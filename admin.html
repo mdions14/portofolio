@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Charlotte Flower</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            50: '#F0F9F4',
+                            100: '#DCF1E5',
+                            200: '#BCE4CE',
+                            300: '#8DD1AE',
+                            400: '#56B889',
+                            500: '#2D9C68',
+                            600: '#1F7E52',
+                            700: '#1B6443',
+                            800: '#184F37',
+                            900: '#0A311F',
+                            950: '#051B11',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Charlotte Shared Data -->
+    <script src="data.js"></script>
+
+    <style>
+        .tab-btn.active {
+            background-color: #0A311F;
+            color: #ffffff;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-[#F4F7F5] text-stone-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Top Admin Bar -->
+    <header class="bg-emerald-950 text-white border-b border-emerald-900 sticky top-0 z-40 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="gambar/logocharlotte.png" alt="Charlotte Flower Logo" class="h-10 sm:h-12 w-auto object-contain filter drop-shadow">
+                <div>
+                    <h1 class="font-serif font-bold text-base sm:text-lg tracking-wide text-white">CHARLOTTE FLOWER</h1>
+                    <p class="text-[10px] text-emerald-300 uppercase tracking-widest font-semibold">Admin CMS Control Panel</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <a href="index.html" target="_blank" class="inline-flex items-center gap-1.5 bg-emerald-900 hover:bg-emerald-800 text-emerald-100 text-xs font-semibold px-3.5 py-2 rounded-xl transition border border-emerald-800">
+                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    <span class="hidden sm:inline">Lihat Website Publik</span>
+                </a>
+                <button onclick="resetDataDefaultConfirm()" class="inline-flex items-center gap-1.5 bg-rose-950/80 hover:bg-rose-900 text-rose-200 text-xs font-semibold px-3 py-2 rounded-xl transition border border-rose-800/80" title="Reset ke data awal">
+                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                    <span class="hidden md:inline">Reset Default</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Left Sidebar Navigation -->
+            <aside class="lg:col-span-3 bg-white rounded-3xl p-4 shadow-sm border border-emerald-100/90 space-y-1 sticky top-24">
+                <div class="px-4 py-3 mb-2">
+                    <span class="text-[11px] font-extrabold uppercase tracking-widest text-emerald-800">Menu Pengaturan</span>
+                </div>
+
+                <button onclick="switchTab('dashboard')" class="tab-btn active w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs sm:text-sm font-semibold transition text-stone-600 hover:bg-emerald-50 text-left" id="btn-tab-dashboard">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                    <span>Ringkasan Dashboard</span>
+                </button>
+
+                <button onclick="switchTab('products')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs sm:text-sm font-semibold transition text-stone-600 hover:bg-emerald-50 text-left" id="btn-tab-products">
+                    <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                    <span>Produk Katalog</span>
+                </button>
+
+                <button onclick="switchTab('company')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs sm:text-sm font-semibold transition text-stone-600 hover:bg-emerald-50 text-left" id="btn-tab-company">
+                    <i data-lucide="building" class="w-4 h-4"></i>
+                    <span>Company Profile</span>
+                </button>
+
+                <button onclick="switchTab('media')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs sm:text-sm font-semibold transition text-stone-600 hover:bg-emerald-50 text-left" id="btn-tab-media">
+                    <i data-lucide="image" class="w-4 h-4"></i>
+                    <span>Foto Hero & Banner</span>
+                </button>
+
+                <button onclick="switchTab('articles')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs sm:text-sm font-semibold transition text-stone-600 hover:bg-emerald-50 text-left" id="btn-tab-articles">
+                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                    <span>Artikel & Tips</span>
+                </button>
+
+                <button onclick="switchTab('store')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs sm:text-sm font-semibold transition text-stone-600 hover:bg-emerald-50 text-left" id="btn-tab-store">
+                    <i data-lucide="store" class="w-4 h-4"></i>
+                    <span>Info Toko & Kontak</span>
+                </button>
+            </aside>
+
+            <!-- Right Content Area -->
+            <main class="lg:col-span-9 space-y-6">
+
+                <!-- Alert Notification Toast -->
+                <div id="save-alert" class="hidden bg-emerald-800 text-white px-5 py-3.5 rounded-2xl shadow-lg flex items-center justify-between border border-emerald-700">
+                    <div class="flex items-center gap-2.5">
+                        <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-300"></i>
+                        <span id="save-alert-msg" class="text-xs sm:text-sm font-bold">Perubahan berhasil disimpan dan tersinkron ke website!</span>
+                    </div>
+                    <button onclick="document.getElementById('save-alert').classList.add('hidden')" class="text-emerald-200 hover:text-white">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- ============================================== -->
+                <!-- TAB 1: DASHBOARD OVERVIEW -->
+                <!-- ============================================== -->
+                <div id="tab-content-dashboard" class="tab-pane space-y-6">
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-emerald-100 shadow-sm">
+                        <span class="text-emerald-700 font-bold text-xs uppercase tracking-widest">Selamat Datang</span>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mt-1">Dashboard Konten Charlotte Flower</h2>
+                        <p class="text-stone-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                            Kelola seluruh aspek konten website mulai dari katalog buket artificial, company profile, artikel blog edukasi, hingga nomor kontak WhatsApp dengan mudah tanpa coding.
+                        </p>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                        <div class="bg-white p-5 rounded-2xl border border-emerald-100 shadow-sm flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-stone-500 font-semibold">Produk Aktif</span>
+                                <p id="stat-product-count" class="font-serif text-2xl font-bold text-stone-900">0</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl border border-emerald-100 shadow-sm flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="book-open" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-stone-500 font-semibold">Artikel Blog</span>
+                                <p id="stat-article-count" class="font-serif text-2xl font-bold text-stone-900">0</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl border border-emerald-100 shadow-sm flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="phone" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-stone-500 font-semibold">WhatsApp Order</span>
+                                <p id="stat-whatsapp-text" class="text-xs font-bold text-stone-900 truncate max-w-[130px]">6282242260047</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl border border-emerald-100 shadow-sm flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="map-pin" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-stone-500 font-semibold">Lokasi Butik</span>
+                                <p class="text-xs font-bold text-stone-900">Gamping, Jogja</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Guidance -->
+                    <div class="bg-gradient-to-r from-emerald-950 to-emerald-900 rounded-3xl p-6 sm:p-8 text-white shadow-md space-y-3">
+                        <h3 class="font-serif text-lg font-bold">Panduan Ringkas Penggunaan Admin:</h3>
+                        <ul class="text-xs sm:text-sm text-emerald-100 space-y-2 list-disc pl-5">
+                            <li><strong>Kelola Produk:</strong> Anda bisa menambah buket baru, mengganti harga, dan memilih foto buket.</li>
+                            <li><strong>Company Profile:</strong> Perbarui cerita butik, visi-misi, serta statistik prestasi Charlotte Flower.</li>
+                            <li><strong>Foto & Banner:</strong> Ganti gambar yang tampil di slider beranda dan pengumuman diskon.</li>
+                            <li><strong>Artikel Blog:</strong> Buat tips merawat bunga atau rekomendasi buket wisuda untuk meningkatkan kepercayaan pembeli.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ============================================== -->
+                <!-- TAB 2: PRODUCTS CATALOG -->
+                <!-- ============================================== -->
+                <div id="tab-content-products" class="tab-pane hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-emerald-100 shadow-sm">
+                        <div>
+                            <h2 class="font-serif text-2xl font-bold text-stone-900">Kelola Produk Katalog</h2>
+                            <p class="text-xs text-stone-500 mt-1">Daftar rangkaian bunga yang tampil di halaman publik</p>
+                        </div>
+                        <button onclick="openProductModal()" class="inline-flex items-center gap-2 bg-emerald-800 hover:bg-emerald-900 text-white text-xs sm:text-sm font-bold px-5 py-3 rounded-2xl shadow-md transition">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            <span>Tambah Produk Baru</span>
+                        </button>
+                    </div>
+
+                    <!-- Products Table -->
+                    <div class="bg-white rounded-3xl border border-emerald-100 shadow-sm overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs sm:text-sm text-stone-700">
+                                <thead class="bg-emerald-50/60 border-b border-emerald-100 text-[11px] uppercase font-bold text-emerald-900 tracking-wider">
+                                    <tr>
+                                        <th class="py-4 px-4 sm:px-6">Foto</th>
+                                        <th class="py-4 px-4">Nama Produk</th>
+                                        <th class="py-4 px-4">Kategori</th>
+                                        <th class="py-4 px-4">Harga</th>
+                                        <th class="py-4 px-4">Badge</th>
+                                        <th class="py-4 px-4 text-right">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="products-table-body" class="divide-y divide-stone-100">
+                                    <!-- Injected via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================== -->
+                <!-- TAB 3: COMPANY PROFILE -->
+                <!-- ============================================== -->
+                <div id="tab-content-company" class="tab-pane hidden space-y-6">
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-emerald-100 shadow-sm space-y-6">
+                        <div class="border-b border-stone-100 pb-4">
+                            <h2 class="font-serif text-2xl font-bold text-stone-900">Edit Company Profile</h2>
+                            <p class="text-xs text-stone-500 mt-1">Profil toko, visi, misi, dan informasi pengrajin bunga</p>
+                        </div>
+
+                        <form id="form-company-profile" onsubmit="saveCompanyProfile(event)" class="space-y-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-xs font-bold text-stone-700 mb-1.5">Judul Utama</label>
+                                    <input type="text" id="cp-title" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-stone-700 mb-1.5">Sub-Judul / Tagline</label>
+                                    <input type="text" id="cp-subtitle" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-stone-700 mb-1.5">Deskripsi Paragraf 1</label>
+                                <textarea id="cp-desc1" rows="3" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none"></textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-stone-700 mb-1.5">Deskripsi Paragraf 2</label>
+                                <textarea id="cp-desc2" rows="3" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none"></textarea>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-xs font-bold text-stone-700 mb-1.5">Visi</label>
+                                    <textarea id="cp-vision" rows="3" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none"></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-stone-700 mb-1.5">Misi</label>
+                                    <textarea id="cp-mission" rows="3" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 space-y-2">
+                                <label class="block text-xs font-bold text-stone-700">Foto Tentang Kami</label>
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <label for="cp-file-input" class="cursor-pointer inline-flex items-center gap-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 px-4 py-2 rounded-xl text-xs font-bold transition shadow-sm">
+                                        <i data-lucide="folder-search" class="w-4 h-4 text-emerald-700"></i>
+                                        <span>Pilih Gambar dari Komputer</span>
+                                    </label>
+                                    <input type="file" id="cp-file-input" accept="image/*" class="hidden" onchange="handleLocalImageUpload(event, 'cp-about-img', 'cp-preview')">
+                                    <span class="text-[11px] text-stone-400">atau gunakan URL gambar:</span>
+                                </div>
+                                <input type="text" id="cp-about-img" class="w-full px-4 py-2 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none" oninput="updateImagePreview('cp-about-img', 'cp-preview')">
+                                <div class="flex items-center gap-3 p-2 rounded-xl bg-stone-50 border border-stone-200/80 max-w-sm">
+                                    <img id="cp-preview" src="" alt="Preview Tentang Kami" class="w-16 h-16 object-cover rounded-lg border border-stone-200 bg-white">
+                                    <div class="text-[11px] text-stone-500">
+                                        <p class="font-semibold text-stone-700">Preview Foto </p>
+                                        <p id="cp-preview-text" class="text-[10px] text-stone-400">Foto profil yang aktif</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-4 flex justify-end">
+                                <button type="submit" class="bg-emerald-800 hover:bg-emerald-900 text-white text-xs sm:text-sm font-bold px-8 py-3 rounded-2xl shadow transition">
+                                    Simpan Company Profile
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- ============================================== -->
+                <!-- TAB 4: HERO IMAGES & PROMO BANNER -->
+                <!-- ============================================== -->
+                <div id="tab-content-media" class="tab-pane hidden space-y-6">
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-emerald-100 shadow-sm space-y-6">
+                        <div class="border-b border-stone-100 pb-4">
+                            <h2 class="font-serif text-2xl font-bold text-stone-900">Kelola Foto Hero & Banner Promo</h2>
+                            <p class="text-xs text-stone-500 mt-1">Atur slider foto produk di beranda dan pengumuman di baris paling atas website</p>
+                        </div>
+
+                        <!-- Announcement Bar Form -->
+                        <div class="bg-emerald-50/60 p-5 rounded-2xl border border-emerald-100 space-y-4">
+                            <h3 class="font-bold text-emerald-950 text-sm flex items-center gap-2">
+                                <i data-lucide="megaphone" class="w-4 h-4 text-emerald-700"></i>
+                                <span>Banner Pengumuman & Diskon (Header Paling Atas)</span>
+                            </h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                                <div class="sm:col-span-8">
+                                    <label class="block text-xs font-semibold text-stone-600 mb-1">Teks Pengumuman Promo</label>
+                                    <input type="text" id="media-ann-text" class="w-full px-4 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                                </div>
+                                <div class="sm:col-span-4">
+                                    <label class="block text-xs font-semibold text-stone-600 mb-1">Kode / Akun Highlight</label>
+                                    <input type="text" id="media-ann-code" class="w-full px-4 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hero Slides -->
+                        <div class="space-y-4">
+                            <h3 class="font-bold text-stone-900 text-sm">3 Foto Slider Beranda:</h3>
+                            <div id="hero-slides-editor" class="space-y-4">
+                                <!-- Injected via JavaScript -->
+                            </div>
+                        </div>
+
+                        <div class="pt-4 flex justify-end">
+                            <button onclick="saveMediaSettings()" class="bg-emerald-800 hover:bg-emerald-900 text-white text-xs sm:text-sm font-bold px-8 py-3 rounded-2xl shadow transition">
+                                Simpan Foto & Banner
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================== -->
+                <!-- TAB 5: ARTICLES & BLOG -->
+                <!-- ============================================== -->
+                <div id="tab-content-articles" class="tab-pane hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-emerald-100 shadow-sm">
+                        <div>
+                            <h2 class="font-serif text-2xl font-bold text-stone-900">Kelola Artikel & Tips Blog</h2>
+                            <p class="text-xs text-stone-500 mt-1">Publikasikan panduan buket, edukasi bunga artificial, dan artikel inspirasi</p>
+                        </div>
+                        <button onclick="openArticleModalAdmin()" class="inline-flex items-center gap-2 bg-emerald-800 hover:bg-emerald-900 text-white text-xs sm:text-sm font-bold px-5 py-3 rounded-2xl shadow-md transition">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            <span>Tulis Artikel Baru</span>
+                        </button>
+                    </div>
+
+                    <!-- Articles Table -->
+                    <div class="bg-white rounded-3xl border border-emerald-100 shadow-sm overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs sm:text-sm text-stone-700">
+                                <thead class="bg-emerald-50/60 border-b border-emerald-100 text-[11px] uppercase font-bold text-emerald-900 tracking-wider">
+                                    <tr>
+                                        <th class="py-4 px-4 sm:px-6">Thumbnail</th>
+                                        <th class="py-4 px-4">Judul Artikel</th>
+                                        <th class="py-4 px-4">Kategori</th>
+                                        <th class="py-4 px-4">Tanggal</th>
+                                        <th class="py-4 px-4 text-right">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="articles-table-body" class="divide-y divide-stone-100">
+                                    <!-- Injected via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================== -->
+                <!-- TAB 6: STORE INFO & CONTACTS -->
+                <!-- ============================================== -->
+                <div id="tab-content-store" class="tab-pane hidden space-y-6">
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-emerald-100 shadow-sm space-y-6">
+                        <div class="border-b border-stone-100 pb-4">
+                            <h2 class="font-serif text-2xl font-bold text-stone-900">Informasi Toko & Kontak</h2>
+                            <p class="text-xs text-stone-500 mt-1">Nomor WhatsApp di sini akan otomatis terhubung ke seluruh tombol pemesanan</p>
+                        </div>
+
+                        <form id="form-store-info" onsubmit="saveStoreInfo(event)" class="space-y-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-xs font-bold text-stone-700 mb-1.5">Nama Toko / Brand</label>
+                                    <input type="text" id="si-name" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-stone-700 mb-1.5">Nomor WhatsApp Pemesanan</label>
+                                    <input type="text" id="si-whatsapp" placeholder="6282242260047" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                                    <span class="text-[10px] text-stone-400 mt-1 block">Format: 6282242260047 (diawali 62 tanpa spasi atau tanda '+')</span>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-stone-700 mb-1.5">Akun Instagram</label>
+                                    <input type="text" id="si-instagram" placeholder="@charlotteflower.id" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-stone-700 mb-1.5">Email Toko</label>
+                                    <input type="email" id="si-email" placeholder="charlotteflowerid@gmail.com" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-stone-700 mb-1.5">Alamat Lengkap Toko</label>
+                                <textarea id="si-address" rows="2" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none"></textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-stone-700 mb-1.5">Catatan / Patokan Lokasi</label>
+                                <input type="text" id="si-address-note" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-xs font-bold text-stone-700 mb-1.5">Jam Buka (Senin - Jumat)</label>
+                                    <input type="text" id="si-hours-weekday" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-stone-700 mb-1.5">Jam Buka (Sabtu - Minggu)</label>
+                                    <input type="text" id="si-hours-weekend" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-xs font-bold text-stone-700 mb-1.5">Google Maps Link (Petunjuk Arah)</label>
+                                    <input type="text" id="si-map-url" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-stone-700 mb-1.5">Google Maps Embed URL (Peta Iframe)</label>
+                                    <input type="text" id="si-map-embed" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                                </div>
+                            </div>
+
+                            <div class="pt-4 flex justify-end">
+                                <button type="submit" class="bg-emerald-800 hover:bg-emerald-900 text-white text-xs sm:text-sm font-bold px-8 py-3 rounded-2xl shadow transition">
+                                    Simpan Informasi Toko
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- PRODUCT EDIT / ADD MODAL -->
+    <!-- ============================================== -->
+    <div id="product-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm p-4 flex items-center justify-center overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl border border-stone-200">
+            <div class="flex items-center justify-between pb-4 border-b border-stone-100">
+                <h3 id="product-modal-title" class="font-serif text-xl font-bold text-stone-900">Tambah Produk Baru</h3>
+                <button onclick="closeProductModal()" class="w-8 h-8 rounded-full bg-stone-100 text-stone-500 flex items-center justify-center hover:bg-stone-200">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <form id="form-product" onsubmit="saveProductForm(event)" class="space-y-4 pt-4">
+                <input type="hidden" id="prod-id">
+                
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 mb-1">Nama Produk</label>
+                    <input type="text" id="prod-name" required class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 mb-1">Kategori</label>
+                        <select id="prod-category" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                            <option value="buket">Hand Bouquet</option>
+                            <option value="box-vas">Bloom Box & Vas</option>
+                            <option value="wisuda">Buket Wisuda</option>
+                            <option value="money">Money Bouquet</option>
+                            <option value="standing">Standing Flower</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 mb-1">Harga (IDR / Rupiah)</label>
+                        <input type="number" id="prod-price" required min="10000" step="5000" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 mb-1">Badge Produk (Opsional)</label>
+                    <input type="text" id="prod-badge" placeholder="Contoh: Best Seller / Luxury / Trending" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-stone-700">Gambar Produk</label>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <label for="prod-file-input" class="cursor-pointer inline-flex items-center gap-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 px-4 py-2 rounded-xl text-xs font-bold transition shadow-sm">
+                            <i data-lucide="folder-search" class="w-4 h-4 text-emerald-700"></i>
+                            <span>Pilih Gambar dari Komputer</span>
+                        </label>
+                        <input type="file" id="prod-file-input" accept="image/*" class="hidden" onchange="handleLocalImageUpload(event, 'prod-image', 'prod-preview')">
+                        <span class="text-[11px] text-stone-400">atau masukkan URL gambar:</span>
+                    </div>
+                    <input type="text" id="prod-image" required placeholder="https://... atau pilih dari komputer" class="w-full px-3.5 py-2 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none" oninput="updateImagePreview('prod-image', 'prod-preview')">
+                    
+                    <!-- Live Image Preview -->
+                    <div class="flex items-center gap-3 p-2 rounded-xl bg-stone-50 border border-stone-200/80">
+                        <img id="prod-preview" src="" alt="Preview Produk" class="w-14 h-14 object-cover rounded-lg border border-stone-200 bg-white">
+                        <div class="text-[11px] text-stone-500">
+                            <p class="font-semibold text-stone-700">Preview Gambar Produk</p>
+                            <p id="prod-preview-text" class="text-[10px] text-stone-400 truncate max-w-xs">Pilih file atau masukkan link gambar</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 mb-1">Deskripsi Singkat</label>
+                    <textarea id="prod-desc" rows="3" required class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none"></textarea>
+                </div>
+
+                <div class="pt-4 flex justify-end gap-3">
+                    <button type="button" onclick="closeProductModal()" class="px-5 py-2.5 rounded-xl text-stone-600 hover:bg-stone-100 text-xs font-semibold">Batal</button>
+                    <button type="submit" class="bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-bold px-6 py-2.5 rounded-xl shadow transition">Simpan Produk</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- ARTICLE EDIT / ADD MODAL -->
+    <!-- ============================================== -->
+    <div id="article-modal-admin" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm p-4 flex items-center justify-center overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl border border-stone-200">
+            <div class="flex items-center justify-between pb-4 border-b border-stone-100">
+                <h3 id="article-modal-title" class="font-serif text-xl font-bold text-stone-900">Tulis Artikel Baru</h3>
+                <button onclick="closeArticleModalAdmin()" class="w-8 h-8 rounded-full bg-stone-100 text-stone-500 flex items-center justify-center hover:bg-stone-200">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <form id="form-article" onsubmit="saveArticleForm(event)" class="space-y-4 pt-4">
+                <input type="hidden" id="art-id">
+                
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 mb-1">Judul Artikel</label>
+                    <input type="text" id="art-title" required class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 mb-1">Kategori</label>
+                        <input type="text" id="art-category" placeholder="Contoh: Tips Wisuda" required class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 mb-1">Tanggal Terbit</label>
+                        <input type="text" id="art-date" placeholder="10 November 2026" required class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-stone-700">Gambar Thumbnail Artikel</label>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <label for="art-file-input" class="cursor-pointer inline-flex items-center gap-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 px-4 py-2 rounded-xl text-xs font-bold transition shadow-sm">
+                            <i data-lucide="folder-search" class="w-4 h-4 text-emerald-700"></i>
+                            <span>Pilih Gambar dari Komputer</span>
+                        </label>
+                        <input type="file" id="art-file-input" accept="image/*" class="hidden" onchange="handleLocalImageUpload(event, 'art-image', 'art-preview')">
+                        <span class="text-[11px] text-stone-400">atau masukkan URL gambar:</span>
+                    </div>
+                    <input type="text" id="art-image" required placeholder="https://... atau pilih dari komputer" class="w-full px-3.5 py-2 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none" oninput="updateImagePreview('art-image', 'art-preview')">
+                    
+                    <!-- Live Thumbnail Preview -->
+                    <div class="flex items-center gap-3 p-2 rounded-xl bg-stone-50 border border-stone-200/80">
+                        <img id="art-preview" src="" alt="Preview Artikel" class="w-14 h-14 object-cover rounded-lg border border-stone-200 bg-white">
+                        <div class="text-[11px] text-stone-500">
+                            <p class="font-semibold text-stone-700">Preview Thumbnail</p>
+                            <p id="art-preview-text" class="text-[10px] text-stone-400 truncate max-w-xs">Pilih file atau masukkan link gambar</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 mb-1">Ringkasan / Cuplikan</label>
+                    <textarea id="art-summary" rows="2" required class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 mb-1">Isi Lengkap Artikel (Format Teks / HTML)</label>
+                    <textarea id="art-content" rows="6" required class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none"></textarea>
+                </div>
+
+                <div class="pt-4 flex justify-end gap-3">
+                    <button type="button" onclick="closeArticleModalAdmin()" class="px-5 py-2.5 rounded-xl text-stone-600 hover:bg-stone-100 text-xs font-semibold">Batal</button>
+                    <button type="submit" class="bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-bold px-6 py-2.5 rounded-xl shadow transition">Simpan Artikel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- JAVASCRIPT CMS LOGIC -->
+    <!-- ============================================== -->
+    <script>
+        let adminData = getCharlotteData();
+
+        // Switch Tabs
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            const targetPane = document.getElementById(`tab-content-${tabName}`);
+            const targetBtn = document.getElementById(`btn-tab-${tabName}`);
+            if (targetPane) targetPane.classList.remove('hidden');
+            if (targetBtn) targetBtn.classList.add('active');
+
+            lucide.createIcons();
+        }
+
+        // Show toast alert
+        function showToast(msg) {
+            const alert = document.getElementById('save-alert');
+            const alertMsg = document.getElementById('save-alert-msg');
+            alertMsg.innerText = msg;
+            alert.classList.remove('hidden');
+            setTimeout(() => {
+                alert.classList.add('hidden');
+            }, 4000);
+        }
+
+        // Load & Populate Data
+        function loadDashboard() {
+            adminData = getCharlotteData();
+
+            // Stats
+            document.getElementById('stat-product-count').innerText = adminData.products.length;
+            document.getElementById('stat-article-count').innerText = adminData.articles.length;
+            document.getElementById('stat-whatsapp-text').innerText = adminData.general.whatsapp || "6282242260047";
+
+            // Render Products Table
+            renderProductsTable();
+
+            // Render Articles Table
+            renderArticlesTable();
+
+            // Populate Company Profile Form
+            document.getElementById('cp-title').value = adminData.about.title || '';
+            document.getElementById('cp-subtitle').value = adminData.about.subtitle || '';
+            document.getElementById('cp-desc1').value = adminData.about.desc1 || '';
+            document.getElementById('cp-desc2').value = adminData.about.desc2 || '';
+            document.getElementById('cp-vision').value = adminData.about.vision || '';
+            document.getElementById('cp-mission').value = adminData.about.mission || '';
+            document.getElementById('cp-about-img').value = adminData.about.aboutImage || '';
+            const cpPreview = document.getElementById('cp-preview');
+            if (cpPreview) cpPreview.src = adminData.about.aboutImage || '';
+
+            // Populate Media & Banner
+            document.getElementById('media-ann-text').value = adminData.announcement.text || '';
+            document.getElementById('media-ann-code').value = adminData.announcement.code || '';
+            renderHeroSlidesEditor();
+
+            // Populate Store Info
+            document.getElementById('si-name').value = adminData.general.storeName || '';
+            document.getElementById('si-whatsapp').value = adminData.general.whatsapp || '';
+            document.getElementById('si-instagram').value = adminData.general.instagram || '';
+            document.getElementById('si-email').value = adminData.general.email || '';
+            document.getElementById('si-address').value = adminData.general.address || '';
+            document.getElementById('si-address-note').value = adminData.general.addressNote || '';
+            document.getElementById('si-hours-weekday').value = adminData.general.openingWeekday || '';
+            document.getElementById('si-hours-weekend').value = adminData.general.openingWeekend || '';
+            document.getElementById('si-map-url').value = adminData.general.mapUrl || '';
+            document.getElementById('si-map-embed').value = adminData.general.mapEmbedUrl || '';
+
+            lucide.createIcons();
+        }
+
+        // Render Products Table
+        function renderProductsTable() {
+            const tbody = document.getElementById('products-table-body');
+            tbody.innerHTML = '';
+
+            adminData.products.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-emerald-50/30 transition";
+                const priceFormatted = typeof formatRupiah === 'function' ? formatRupiah(p.price) : `Rp ${p.price}`;
+
+                tr.innerHTML = `
+                    <td class="py-3 px-4 sm:px-6">
+                        <img src="${p.image}" alt="${p.name}" class="w-12 h-12 rounded-xl object-cover border border-stone-200">
+                    </td>
+                    <td class="py-3 px-4 font-bold text-stone-900">${p.name}</td>
+                    <td class="py-3 px-4 text-xs font-semibold text-emerald-800">${p.categoryLabel || p.category}</td>
+                    <td class="py-3 px-4 font-bold text-emerald-900">${priceFormatted}</td>
+                    <td class="py-3 px-4">
+                        ${p.badge ? `<span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">${p.badge}</span>` : '<span class="text-stone-300">-</span>'}
+                    </td>
+                    <td class="py-3 px-4 text-right space-x-1">
+                        <button onclick="editProduct('${p.id}')" class="p-1.5 rounded-lg bg-emerald-50 text-emerald-800 hover:bg-emerald-100 transition" title="Edit">
+                            <i data-lucide="edit-3" class="w-4 h-4"></i>
+                        </button>
+                        <button onclick="deleteProduct('${p.id}')" class="p-1.5 rounded-lg bg-rose-50 text-rose-600 hover:bg-rose-100 transition" title="Hapus">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            lucide.createIcons();
+        }
+
+        // Product Modal & Operations
+        function openProductModal() {
+            document.getElementById('form-product').reset();
+            document.getElementById('prod-id').value = '';
+            document.getElementById('prod-preview').src = '';
+            document.getElementById('prod-preview-text').innerText = 'Pilih file atau masukkan link gambar';
+            document.getElementById('product-modal-title').innerText = 'Tambah Produk Baru';
+            document.getElementById('product-modal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        function editProduct(id) {
+            const product = adminData.products.find(p => p.id === id);
+            if (!product) return;
+
+            document.getElementById('prod-id').value = product.id;
+            document.getElementById('prod-name').value = product.name;
+            document.getElementById('prod-category').value = product.category;
+            document.getElementById('prod-price').value = product.price;
+            document.getElementById('prod-badge').value = product.badge || '';
+            document.getElementById('prod-image').value = product.image;
+            document.getElementById('prod-preview').src = product.image;
+            document.getElementById('prod-preview-text').innerText = 'Gambar aktif saat ini';
+            document.getElementById('prod-desc').value = product.desc;
+
+            document.getElementById('product-modal-title').innerText = 'Edit Produk';
+            document.getElementById('product-modal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function saveProductForm(e) {
+            e.preventDefault();
+            const id = document.getElementById('prod-id').value;
+            const categorySelect = document.getElementById('prod-category');
+            const categoryLabel = categorySelect.options[categorySelect.selectedIndex].text;
+
+            const newProduct = {
+                id: id || Date.now().toString(),
+                name: document.getElementById('prod-name').value,
+                category: categorySelect.value,
+                categoryLabel: categoryLabel,
+                price: parseInt(document.getElementById('prod-price').value),
+                badge: document.getElementById('prod-badge').value,
+                image: document.getElementById('prod-image').value,
+                desc: document.getElementById('prod-desc').value,
+            };
+
+            if (id) {
+                const index = adminData.products.findIndex(p => p.id === id);
+                if (index !== -1) adminData.products[index] = newProduct;
+            } else {
+                adminData.products.unshift(newProduct);
+            }
+
+            saveCharlotteData(adminData);
+            closeProductModal();
+            loadDashboard();
+            showToast('Produk berhasil disimpan dan aktif di website!');
+        }
+
+        function deleteProduct(id) {
+            if (confirm('Yakin ingin menghapus produk ini?')) {
+                adminData.products = adminData.products.filter(p => p.id !== id);
+                saveCharlotteData(adminData);
+                loadDashboard();
+                showToast('Produk berhasil dihapus!');
+            }
+        }
+
+        // Render Articles Table
+        function renderArticlesTable() {
+            const tbody = document.getElementById('articles-table-body');
+            tbody.innerHTML = '';
+
+            adminData.articles.forEach(art => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-emerald-50/30 transition";
+
+                tr.innerHTML = `
+                    <td class="py-3 px-4 sm:px-6">
+                        <img src="${art.image}" alt="${art.title}" class="w-12 h-12 rounded-xl object-cover border border-stone-200">
+                    </td>
+                    <td class="py-3 px-4 font-bold text-stone-900 max-w-xs truncate">${art.title}</td>
+                    <td class="py-3 px-4 text-xs font-semibold text-emerald-800">${art.category}</td>
+                    <td class="py-3 px-4 text-xs text-stone-500">${art.date}</td>
+                    <td class="py-3 px-4 text-right space-x-1">
+                        <button onclick="editArticle('${art.id}')" class="p-1.5 rounded-lg bg-emerald-50 text-emerald-800 hover:bg-emerald-100 transition" title="Edit">
+                            <i data-lucide="edit-3" class="w-4 h-4"></i>
+                        </button>
+                        <button onclick="deleteArticle('${art.id}')" class="p-1.5 rounded-lg bg-rose-50 text-rose-600 hover:bg-rose-100 transition" title="Hapus">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            lucide.createIcons();
+        }
+
+        function openArticleModalAdmin() {
+            document.getElementById('form-article').reset();
+            document.getElementById('art-id').value = '';
+            document.getElementById('art-preview').src = '';
+            document.getElementById('art-preview-text').innerText = 'Pilih file atau masukkan link gambar';
+            document.getElementById('art-date').value = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+            document.getElementById('article-modal-title').innerText = 'Tulis Artikel Baru';
+            document.getElementById('article-modal-admin').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeArticleModalAdmin() {
+            document.getElementById('article-modal-admin').classList.add('hidden');
+        }
+
+        function editArticle(id) {
+            const article = adminData.articles.find(a => a.id === id);
+            if (!article) return;
+
+            document.getElementById('art-id').value = article.id;
+            document.getElementById('art-title').value = article.title;
+            document.getElementById('art-category').value = article.category;
+            document.getElementById('art-date').value = article.date;
+            document.getElementById('art-image').value = article.image;
+            document.getElementById('art-preview').src = article.image;
+            document.getElementById('art-preview-text').innerText = 'Thumbnail aktif saat ini';
+            document.getElementById('art-summary').value = article.summary;
+            document.getElementById('art-content').value = article.content || article.summary;
+
+            document.getElementById('article-modal-title').innerText = 'Edit Artikel';
+            document.getElementById('article-modal-admin').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function saveArticleForm(e) {
+            e.preventDefault();
+            const id = document.getElementById('art-id').value;
+
+            const newArticle = {
+                id: id || Date.now().toString(),
+                title: document.getElementById('art-title').value,
+                category: document.getElementById('art-category').value,
+                date: document.getElementById('art-date').value,
+                image: document.getElementById('art-image').value,
+                summary: document.getElementById('art-summary').value,
+                content: document.getElementById('art-content').value,
+                readTime: "4 menit baca",
+                author: "Charlotte Editorial Team"
+            };
+
+            if (id) {
+                const index = adminData.articles.findIndex(a => a.id === id);
+                if (index !== -1) adminData.articles[index] = newArticle;
+            } else {
+                adminData.articles.unshift(newArticle);
+            }
+
+            saveCharlotteData(adminData);
+            closeArticleModalAdmin();
+            loadDashboard();
+            showToast('Artikel berhasil disimpan!');
+        }
+
+        function deleteArticle(id) {
+            if (confirm('Hapus artikel ini?')) {
+                adminData.articles = adminData.articles.filter(a => a.id !== id);
+                saveCharlotteData(adminData);
+                loadDashboard();
+                showToast('Artikel berhasil dihapus!');
+            }
+        }
+
+        // Save Company Profile
+        function saveCompanyProfile(e) {
+            e.preventDefault();
+            adminData.about.title = document.getElementById('cp-title').value;
+            adminData.about.subtitle = document.getElementById('cp-subtitle').value;
+            adminData.about.desc1 = document.getElementById('cp-desc1').value;
+            adminData.about.desc2 = document.getElementById('cp-desc2').value;
+            adminData.about.vision = document.getElementById('cp-vision').value;
+            adminData.about.mission = document.getElementById('cp-mission').value;
+            adminData.about.aboutImage = document.getElementById('cp-about-img').value;
+
+            saveCharlotteData(adminData);
+            showToast('Company Profile berhasil diperbarui!');
+        }
+
+        // Hero Slides Editor dengan File Upload Komputer
+        function renderHeroSlidesEditor() {
+            const container = document.getElementById('hero-slides-editor');
+            container.innerHTML = '';
+
+            adminData.general.heroImages.forEach((img, idx) => {
+                const card = document.createElement('div');
+                card.className = "p-4 sm:p-5 rounded-2xl border border-stone-200 bg-stone-50 space-y-3";
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-emerald-950">Slide Foto ${idx + 1}</span>
+                        <div class="flex items-center gap-2">
+                            <label for="hero-file-${idx}" class="cursor-pointer inline-flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-bold transition shadow-sm">
+                                <i data-lucide="folder-search" class="w-3.5 h-3.5 text-emerald-700"></i>
+                                <span>Pilih Gambar dari Komputer</span>
+                            </label>
+                            <input type="file" id="hero-file-${idx}" accept="image/*" class="hidden" onchange="handleLocalImageUpload(event, 'hero-url-${idx}', 'hero-preview-${idx}')">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+                        <div class="sm:col-span-2">
+                            <img id="hero-preview-${idx}" src="${img.url}" alt="Preview Slide" class="w-16 h-16 object-cover rounded-xl border border-stone-200 bg-white shadow-sm">
+                        </div>
+                        <div class="sm:col-span-5">
+                            <label class="block text-[11px] font-semibold text-stone-600 mb-0.5">URL / Sumber Gambar</label>
+                            <input type="text" id="hero-url-${idx}" value="${img.url}" class="w-full px-3 py-1.5 rounded-lg border border-stone-200 text-xs" oninput="updateImagePreview('hero-url-${idx}', 'hero-preview-${idx}')">
+                        </div>
+                        <div class="sm:col-span-3">
+                            <label class="block text-[11px] font-semibold text-stone-600 mb-0.5">Judul Buket</label>
+                            <input type="text" id="hero-title-${idx}" value="${img.title}" class="w-full px-3 py-1.5 rounded-lg border border-stone-200 text-xs">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="block text-[11px] font-semibold text-stone-600 mb-0.5">Tag Badge</label>
+                            <input type="text" id="hero-tag-${idx}" value="${img.tag}" class="w-full px-3 py-1.5 rounded-lg border border-stone-200 text-xs">
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        // Universal Local Image Upload Handler (reads file as DataURL Base64)
+        function handleLocalImageUpload(event, targetInputId, targetPreviewId) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+
+            if (file.size > 3 * 1024 * 1024) {
+                alert("Peringatan: Ukuran gambar cukup besar (" + (file.size / (1024*1024)).toFixed(1) + " MB). Disarankan menggunakan foto di bawah 3MB agar performa website maksimal.");
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64Data = e.target.result;
+                const inputEl = document.getElementById(targetInputId);
+                if (inputEl) {
+                    inputEl.value = base64Data;
+                }
+                if (targetPreviewId) {
+                    const previewEl = document.getElementById(targetPreviewId);
+                    if (previewEl) {
+                        previewEl.src = base64Data;
+                    }
+                }
+                const previewTextEl = document.getElementById(targetPreviewId + '-text');
+                if (previewTextEl) {
+                    previewTextEl.innerText = file.name + " (" + (file.size / 1024).toFixed(1) + " KB)";
+                }
+                showToast("File gambar '" + file.name + "' berhasil dipilih!");
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function updateImagePreview(inputId, previewId) {
+            const inputEl = document.getElementById(inputId);
+            const previewEl = document.getElementById(previewId);
+            if (inputEl && previewEl) {
+                previewEl.src = inputEl.value;
+            }
+        }
+
+        function saveMediaSettings() {
+            adminData.announcement.text = document.getElementById('media-ann-text').value;
+            adminData.announcement.code = document.getElementById('media-ann-code').value;
+
+            adminData.general.heroImages.forEach((img, idx) => {
+                const urlEl = document.getElementById(`hero-url-${idx}`);
+                const titleEl = document.getElementById(`hero-title-${idx}`);
+                const tagEl = document.getElementById(`hero-tag-${idx}`);
+                if (urlEl) img.url = urlEl.value;
+                if (titleEl) img.title = titleEl.value;
+                if (tagEl) img.tag = tagEl.value;
+            });
+
+            saveCharlotteData(adminData);
+            showToast('Foto hero dan banner promo berhasil disimpan!');
+        }
+
+        // Save Store Info
+        function saveStoreInfo(e) {
+            e.preventDefault();
+            adminData.general.storeName = document.getElementById('si-name').value;
+            adminData.general.whatsapp = document.getElementById('si-whatsapp').value;
+            adminData.general.instagram = document.getElementById('si-instagram').value;
+            adminData.general.email = document.getElementById('si-email').value;
+            adminData.general.address = document.getElementById('si-address').value;
+            adminData.general.addressNote = document.getElementById('si-address-note').value;
+            adminData.general.openingWeekday = document.getElementById('si-hours-weekday').value;
+            adminData.general.openingWeekend = document.getElementById('si-hours-weekend').value;
+            adminData.general.mapUrl = document.getElementById('si-map-url').value;
+            adminData.general.mapEmbedUrl = document.getElementById('si-map-embed').value;
+
+            saveCharlotteData(adminData);
+            loadDashboard();
+            showToast('Informasi toko & kontak berhasil diperbarui!');
+        }
+
+        // Reset Data
+        function resetDataDefaultConfirm() {
+            if (confirm('Apakah Anda yakin ingin mengembalikan seluruh konten ke data awal default? Perubahan yang belum dicadangkan akan hilang.')) {
+                resetCharlotteData();
+                loadDashboard();
+                showToast('Data berhasil di-reset ke kondisi awal!');
+            }
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDashboard();
+        });
+    </script>
+</body>
+</html>

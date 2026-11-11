@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charlotte Flower | Modern Artificial Flower Yogyakarta</title>
+    <link rel="icon" type="image/png" href="gambar/logocharlotte.png">
+    
+    <!-- Meta SEO -->
+    <meta name="description" content="Charlotte Flower adalah florist artificial modern di Yogyakarta dengan sentuhan Korean & European style. Rangkaian bunga abadi premium untuk wisuda, ulang tahun, dan momen spesial.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Alex+Brush&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            50: '#F0F9F4',
+                            100: '#DCF1E5',
+                            200: '#BCE4CE',
+                            300: '#8DD1AE',
+                            400: '#56B889',
+                            500: '#2D9C68',
+                            600: '#1F7E52',
+                            700: '#1B6443',
+                            800: '#184F37',
+                            900: '#0A311F', // Signature Deep Luxury Emerald
+                            950: '#051B11',
+                        },
+                        botanical: {
+                            gold: '#C5A059',
+                            cream: '#FAF7F2',
+                            sage: '#638475',
+                            charcoal: '#1A2420',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                        floral: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        script: ['"Alex Brush"', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Charlotte Shared Data -->
+    <script src="data.js"></script>
+
+    <style>
+        /* Modern Glass Navbar */
+        .glass-nav {
+            background: rgba(10, 49, 31, 0.96);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        /* Kaninara-Style Elegant Clean Hero Background (Perpaduan Pink Soft & Hijau Emerald) */
+        .kaninara-hero-bg {
+            background: linear-gradient(135deg, 
+                #FDF1F5 0%, 
+                #FCE7F0 22%, 
+                #F3FAF6 62%, 
+                #DCF1E5 100%
+            );
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle Organic Glow Accents (Pink Soft & Emerald) */
+        .kaninara-hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: -5%;
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, rgba(244, 114, 182, 0.22) 0%, rgba(253, 232, 240, 0.1) 60%, transparent 80%);
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(40px);
+        }
+
+        .kaninara-hero-bg::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            right: -5%;
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, rgba(45, 156, 104, 0.22) 0%, rgba(220, 241, 229, 0.1) 60%, transparent 80%);
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(50px);
+        }
+
+        /* Animasi Bunga-Bunga Bergerak (Floating Floral Animation) */
+        @keyframes floatFlowerUp {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(0.9);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.75;
+            }
+            85% {
+                opacity: 0.75;
+            }
+            100% {
+                transform: translate(45px, -320px) rotate(360deg) scale(1.1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes swayDrift {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            33% {
+                transform: translate(18px, -20px) rotate(12deg);
+            }
+            66% {
+                transform: translate(-14px, 16px) rotate(-10deg);
+            }
+        }
+
+        @keyframes gentlePulseRotate {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.12);
+            }
+        }
+
+        .floating-blossom {
+            position: absolute;
+            pointer-events: none;
+            user-select: none;
+            animation: floatFlowerUp linear infinite;
+        }
+
+        .swaying-blossom {
+            position: absolute;
+            pointer-events: none;
+            user-select: none;
+            animation: swayDrift ease-in-out infinite;
+        }
+
+        /* Smooth Floating Animation for Badges */
+        @keyframes subtleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-7px); }
+        }
+        @keyframes floatReverse {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(7px); }
+        }
+        .animate-float {
+            animation: subtleFloat 4s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+            animation: floatReverse 4.5s ease-in-out infinite;
+        }
+
+        /* Photo Transition Effect */
+        .hero-img-transition {
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Marquee Continuous Running Text (Teks Bergerak ke Samping) */
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee-smooth {
+            display: inline-flex;
+            width: max-content;
+            animation: marqueeScroll 28s linear infinite;
+        }
+        .marquee-wrapper:hover .animate-marquee-smooth {
+            animation-play-state: paused;
+        }
+
+        /* ============================================================ */
+        /* SECTION FLORAL BACKGROUNDS — Emerald + Pink Soft            */
+        /* ============================================================ */
+
+        /* Shared: makes the section a stacking context for abs flowers */
+        .floral-section-bg {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Pink-dominant gradient */
+        .floral-pink-bg {
+            background: linear-gradient(135deg,
+                #FDF1F5 0%,
+                #FEE9F2 35%,
+                #F3FAF6 70%,
+                #DCF1E5 100%
+            );
+        }
+
+        /* Emerald-dominant gradient */
+        .floral-emerald-bg {
+            background: linear-gradient(135deg,
+                #EEF8F2 0%,
+                #DCF1E5 35%,
+                #FDF1F5 75%,
+                #FCE7F0 100%
+            );
+        }
+
+        /* Alternating pink-emerald gradient */
+        .floral-alt-bg {
+            background: linear-gradient(150deg,
+                #FCE7F0 0%,
+                #F9F0F7 25%,
+                #F3FAF6 55%,
+                #EEF8F2 100%
+            );
+        }
+
+        /* How-to-Order section subtle tint */
+        .floral-order-bg {
+            background: linear-gradient(135deg,
+                #F3FAF6 0%,
+                #EEF8F2 40%,
+                #FDF1F5 75%,
+                #FEE9F2 100%
+            );
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 9px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F0F4F2;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2D9C68;
+            border-radius: 6px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1B6443;
+        }
+    </style>
+</head>
+<body class="bg-[#F8FAF8] text-botanical-charcoal font-sans antialiased selection:bg-emerald-200 selection:text-emerald-950">
+
+    <!-- Top Announcement Bar (Teks Bergerak ke Samping) -->
+    <div id="site-announcement-bar" class="bg-emerald-900 text-white text-xs md:text-sm py-2 overflow-hidden border-b border-emerald-800/80 marquee-wrapper relative shadow-sm">
+        <div class="animate-marquee-smooth flex items-center space-x-12 whitespace-nowrap">
+            <div class="flex items-center gap-3">
+                <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
+                <span><span id="site-announcement-text-1">Spesial Bulan Ini: Dapatkan diskon 10% dengan follow Instagram kami</span> <strong id="site-announcement-code-1" class="text-amber-300 underline underline-offset-2">@charlotteflower.id</strong></span>
+                <span class="mx-3 text-emerald-500">•</span>
+                <span class="text-emerald-200">🌸 Melayani Pemesanan Ready Stock & Custom Bouquet Same-Day Jogja</span>
+                <span class="mx-3 text-emerald-500">•</span>
+                <span class="text-amber-300">✨ Bunga Artificial Premium Modern</span>
+            </div>
+            <div class="flex items-center gap-3" aria-hidden="true">
+                <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
+                <span><span id="site-announcement-text-2">Spesial Bulan Ini: Dapatkan diskon 10% dengan follow Instagram kami</span> <strong id="site-announcement-code-2" class="text-amber-300 underline underline-offset-2">@charlotteflower.id</strong></span>
+                <span class="mx-3 text-emerald-500">•</span>
+                <span class="text-emerald-200">🌸Melayani Pemesanan Ready Stock & Custom Bouquet Same-Day Jogja</span>
+                <span class="mx-3 text-emerald-500">•</span>
+                <span class="text-amber-300">✨Bunga Artificial Premium Modern</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Main Header -->
+    <header class="sticky top-0 z-50 glass-nav border-b border-emerald-800/60 shadow-lg" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Brand Name -->
+                <a href="#beranda" class="flex items-center gap-3 group py-1">
+                    <img src="gambar/logocharlotte.png" alt="Charlotte Flower Logo" class="h-12 sm:h-14 md:h-16 w-auto object-contain transition-transform group-hover:scale-105 filter drop-shadow">
+                </a>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden lg:flex items-center space-x-8 text-sm font-medium text-emerald-100">
+                    <a href="#beranda" class="hover:text-white transition py-1 hover:border-b-2 hover:border-emerald-400">Beranda</a>
+                    <a href="#kategori" class="hover:text-white transition py-1 hover:border-b-2 hover:border-emerald-400">Kategori</a>
+                    <a href="#katalog-harga" class="hover:text-white transition py-1 hover:border-b-2 hover:border-emerald-400">Katalog Produk</a>
+                    <a href="#tentang-kami" class="hover:text-white transition py-1 hover:border-b-2 hover:border-emerald-400">Tentang Kami</a>
+                    <a href="#lokasi" class="hover:text-white transition py-1 hover:border-b-2 hover:border-emerald-400">Lokasi Toko</a>
+                </nav>
+
+
+                <!-- Mobile Hamburger Button -->
+                <div class="flex lg:hidden items-center gap-2">
+                    <a href="admin.html" target="_blank" class="text-xs text-emerald-300 px-2 py-1 rounded border border-emerald-700">Admin</a>
+                    <button type="button" id="mobile-menu-btn" class="text-white hover:text-emerald-300 p-2 focus:outline-none" aria-label="Toggle menu">
+                        <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-emerald-950 border-b border-emerald-800 px-6 py-6 space-y-4 shadow-2xl">
+            <a href="#beranda" class="mobile-link block text-emerald-100 hover:text-white font-medium py-1">Beranda</a>
+            <a href="#kategori" class="mobile-link block text-emerald-100 hover:text-white font-medium py-1">Kategori Pilihan</a>
+            <a href="#katalog-harga" class="mobile-link block text-emerald-100 hover:text-white font-medium py-1">Katalog Produk</a>
+            <a href="#tentang-kami" class="mobile-link block text-emerald-100 hover:text-white font-medium py-1">Tentang Kami</a>
+            <a href="#lokasi" class="mobile-link block text-emerald-100 hover:text-white font-medium py-1">Lokasi & Kontak</a>
+            <div class="pt-4 border-t border-emerald-800/80">
+                <a href="https://wa.me/6282242260047?text=Halo%20Charlotte%20Flower,%20saya%20ingin%20konsultasi%20pesanan%20bunga" 
+                   target="_blank"
+                   class="w-full inline-flex items-center justify-center gap-2 bg-white hover:bg-emerald-50 text-emerald-900 px-5 py-3 rounded-full text-sm font-bold shadow-md transition">
+                    <i data-lucide="message-circle" class="w-4 h-4 text-emerald-700"></i>
+                    <span>Pesan via WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================= -->
+    <!-- HERO SECTION -->
+    <!-- ============================================================= -->
+    <section id="beranda" class="relative kaninara-hero-bg pt-10 pb-16 lg:pt-16 lg:pb-24 border-b border-emerald-100 overflow-hidden">
+        
+        <!-- Animasi Bunga-Bunga Bergerak di Background (Floral Petals & Blooms) -->
+        <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+            
+            <!-- Bunga 1: Mawar Pink Soft Kiri Atas (Swaying) -->
+            <div class="swaying-blossom" style="top: 8%; left: 4%; animation-duration: 9s;">
+                <svg width="42" height="42" viewBox="0 0 100 100" class="opacity-40">
+                    <circle cx="50" cy="50" r="14" fill="#F472B6" opacity="0.6"/>
+                    <circle cx="50" cy="30" r="15" fill="#FBCFE8" opacity="0.7"/>
+                    <circle cx="70" cy="50" r="15" fill="#FBCFE8" opacity="0.7"/>
+                    <circle cx="50" cy="70" r="15" fill="#FBCFE8" opacity="0.7"/>
+                    <circle cx="30" cy="50" r="15" fill="#FBCFE8" opacity="0.7"/>
+                    <circle cx="50" cy="50" r="8" fill="#F59E0B" opacity="0.8"/>
+                </svg>
+            </div>
+
+            <!-- Bunga 2: Daun / Petal Emerald Kiri Tengah (Melayang Naik) -->
+            <div class="floating-blossom" style="bottom: 10%; left: 12%; animation-duration: 14s; animation-delay: 0s;">
+                <svg width="34" height="34" viewBox="0 0 100 100" class="opacity-45">
+                    <path d="M50 0 C75 25 75 75 50 100 C25 75 25 25 50 0 Z" fill="#2D9C68"/>
+                    <line x1="50" y1="10" x2="50" y2="90" stroke="#1B6443" stroke-width="4" opacity="0.6"/>
+                </svg>
+            </div>
+
+            <!-- Bunga 3: Kelopak Pink Melayang Kiri Bawah -->
+            <div class="floating-blossom" style="bottom: 5%; left: 28%; animation-duration: 16s; animation-delay: 3s;">
+                <svg width="30" height="30" viewBox="0 0 100 100" class="opacity-55">
+                    <ellipse cx="50" cy="50" rx="35" ry="20" fill="#F472B6" transform="rotate(-30 50 50)"/>
+                    <ellipse cx="50" cy="50" rx="20" ry="12" fill="#FDF2F8"/>
+                </svg>
+            </div>
+
+            <!-- Bunga 4: Bunga Melati Emerald Tengah (Swaying) -->
+            <div class="swaying-blossom" style="top: 22%; left: 45%; animation-duration: 11s; animation-delay: 1.5s;">
+                <svg width="36" height="36" viewBox="0 0 100 100" class="opacity-35">
+                    <g transform="translate(50,50)">
+                        <circle cx="0" cy="-22" r="14" fill="#BCE4CE"/>
+                        <circle cx="22" cy="0" r="14" fill="#BCE4CE"/>
+                        <circle cx="0" cy="22" r="14" fill="#BCE4CE"/>
+                        <circle cx="-22" cy="0" r="14" fill="#BCE4CE"/>
+                        <circle cx="0" cy="0" r="10" fill="#2D9C68"/>
+                    </g>
+                </svg>
+            </div>
+
+            <!-- Bunga 5: Sakura Pink Soft Tengah Bawah (Melayang Naik) -->
+            <div class="floating-blossom" style="bottom: 8%; left: 52%; animation-duration: 15s; animation-delay: 5s;">
+                <svg width="38" height="38" viewBox="0 0 100 100" class="opacity-50">
+                    <g transform="translate(50,50)">
+                        <circle cx="0" cy="-20" r="13" fill="#F9A8D4"/>
+                        <circle cx="19" cy="-6" r="13" fill="#FBCFE8"/>
+                        <circle cx="12" cy="16" r="13" fill="#F9A8D4"/>
+                        <circle cx="-12" cy="16" r="13" fill="#FBCFE8"/>
+                        <circle cx="-19" cy="-6" r="13" fill="#F9A8D4"/>
+                        <circle cx="0" cy="0" r="8" fill="#FDE047"/>
+                    </g>
+                </svg>
+            </div>
+
+            <!-- Bunga 6: Daun Emerald Melayang Kanan Bawah -->
+            <div class="floating-blossom" style="bottom: 12%; right: 18%; animation-duration: 13s; animation-delay: 2s;">
+                <svg width="32" height="32" viewBox="0 0 100 100" class="opacity-40">
+                    <path d="M50 0 C80 30 80 70 50 100 C20 70 20 30 50 0 Z" fill="#56B889"/>
+                </svg>
+            </div>
+
+            <!-- Bunga 7: Bunga Mawar Pink Mekar Kanan Atas (Swaying) -->
+            <div class="swaying-blossom" style="top: 12%; right: 6%; animation-duration: 8s; animation-delay: 2.5s;">
+                <svg width="46" height="46" viewBox="0 0 100 100" class="opacity-45">
+                    <circle cx="50" cy="50" r="26" fill="#FCE7F0"/>
+                    <circle cx="50" cy="40" r="14" fill="#F472B6" opacity="0.65"/>
+                    <circle cx="60" cy="55" r="14" fill="#FB7185" opacity="0.6"/>
+                    <circle cx="40" cy="55" r="14" fill="#F472B6" opacity="0.65"/>
+                    <circle cx="50" cy="50" r="8" fill="#FBBF24"/>
+                </svg>
+            </div>
+
+            <!-- Bunga 8: Kelopak Bunga Pink Lembut Kanan Tengah -->
+            <div class="floating-blossom" style="bottom: 2%; right: 35%; animation-duration: 17s; animation-delay: 7s;">
+                <svg width="26" height="26" viewBox="0 0 100 100" class="opacity-50">
+                    <ellipse cx="50" cy="50" rx="36" ry="18" fill="#F472B6" transform="rotate(45 50 50)"/>
+                </svg>
+            </div>
+
+            <!-- Bunga 9: Mini Bloom Emerald Kiri Atas -->
+            <div class="floating-blossom" style="bottom: 18%; left: 3%; animation-duration: 18s; animation-delay: 9s;">
+                <svg width="28" height="28" viewBox="0 0 100 100" class="opacity-40">
+                    <g transform="translate(50,50)">
+                        <circle cx="0" cy="-15" r="10" fill="#8DD1AE"/>
+                        <circle cx="15" cy="0" r="10" fill="#8DD1AE"/>
+                        <circle cx="0" cy="15" r="10" fill="#8DD1AE"/>
+                        <circle cx="-15" cy="0" r="10" fill="#8DD1AE"/>
+                        <circle cx="0" cy="0" r="6" fill="#184F37"/>
+                    </g>
+                </svg>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                <!-- Left Column: Value Proposition & Copywriting -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    
+                    <!-- Pill Tag (Kaninara style badge) -->
+                    <div class="inline-flex items-center gap-2.5 bg-emerald-100/90 text-emerald-800 border border-emerald-200/90 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold tracking-wide uppercase shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-emerald-600 animate-ping"></span>
+                        <span id="hero-tag-text">Modern Artificial Flower</span>
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    </div>
+
+                    <!-- Main Headline (Cormorant Garamond + Playfair with elegant script accent) -->
+                    <h1 class="font-floral text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.18] text-stone-900 tracking-tight">
+                        Charlotte Flower untuk <span class="font-script text-5xl sm:text-6xl lg:text-7xl text-emerald-700 font-normal block sm:inline">Kebahagiaan dan Moment</span> yang Berharga.
+                    </h1>
+
+                    <!-- Subtitle / Paragraph -->
+                    <p id="hero-subtitle-text" class="text-base sm:text-lg text-stone-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                        Charlotte Flower merupakan florist Jogja yang berfokus pada rangkaian artificial flower modern dengan sentuhan Korean style. Bunga artificial yang estetik.
+                    </p>
+
+                    <!-- CTA Buttons (Kaninara Florist Shop Now style) -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+                        <a href="#katalog-harga" class="inline-flex items-center justify-center gap-3 bg-emerald-800 hover:bg-emerald-900 text-white font-bold px-8 py-4 rounded-full shadow-lg shadow-emerald-900/20 hover:shadow-xl transition-all transform hover:-translate-y-0.5">
+                            <span>Jelajahi Katalog & Harga</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#lokasi" class="inline-flex items-center justify-center gap-2.5 bg-white hover:bg-emerald-50/70 border-2 border-emerald-200 text-emerald-900 font-bold px-8 py-4 rounded-full transition-all shadow-sm hover:border-emerald-600">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-emerald-600"></i>
+                            <span>Kunjungi Toko Kami</span>
+                        </a>
+                    </div>
+
+                    <!-- Trust Signals (Kaninara style highlight badges) -->
+                    <div class="pt-6 border-t border-emerald-200/60 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-left">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 flex-shrink-0">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            <span class="text-xs sm:text-sm font-semibold text-stone-700 leading-tight">Artificial Flower</span>
+                        </div>
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 flex-shrink-0">
+                                <i data-lucide="truck" class="w-4 h-4"></i>
+                            </div>
+                            <span class="text-xs sm:text-sm font-semibold text-stone-700 leading-tight">Same-Day Jogja</span>
+                        </div>
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 flex-shrink-0">
+                                <i data-lucide="heart" class="w-4 h-4"></i>
+                            </div>
+                            <span class="text-xs sm:text-sm font-semibold text-stone-700 leading-tight">Korean Style</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Interactive Photo Showcase with Slider & Floating Badges -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        
+                        <!-- Decorative Modern Frames (Emerald & Warm Gold) -->
+                        <div class="absolute -top-4 -left-4 w-full h-full rounded-[2.5rem] bg-emerald-200/60 transform -rotate-3 transition duration-500"></div>
+                        <div class="absolute -bottom-4 -right-4 w-full h-full rounded-[2.5rem] bg-botanical-gold/20 transform rotate-3 transition duration-500"></div>
+
+                        <!-- Main Showcase Card -->
+                        <div class="relative overflow-hidden rounded-[2.2rem] shadow-2xl border-4 border-white bg-white group">
+                            
+                            <!-- Main Hero Image -->
+                            <img id="hero-main-img" 
+                                 src="gambar/weareopencharlotte.jpg" 
+                                 alt="Charlotte Flower Signature Bouquet" 
+                                 class="hero-img-transition w-full h-[460px] sm:h-[500px] object-cover group-hover:scale-105 duration-700 ease-out">
+                            
+                        </div>
+
+                       
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- SHOP BY CATEGORY -->
+    <!-- ============================================================= -->
+    <section id="kategori" class="py-14 floral-section-bg floral-emerald-bg border-b border-emerald-100">
+
+        <!-- Floral Animations: Kategori -->
+        <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+            <!-- Sakura kiri atas -->
+            <div class="swaying-blossom" style="top:6%;left:3%;animation-duration:11s;">
+                <svg width="36" height="36" viewBox="0 0 100 100" class="opacity-35">
+                    <circle cx="50" cy="30" r="13" fill="#FBCFE8" opacity="0.85"/>
+                    <circle cx="70" cy="50" r="13" fill="#FBCFE8" opacity="0.85"/>
+                    <circle cx="50" cy="70" r="13" fill="#FBCFE8" opacity="0.85"/>
+                    <circle cx="30" cy="50" r="13" fill="#FBCFE8" opacity="0.85"/>
+                    <circle cx="50" cy="50" r="7"  fill="#FDE68A" opacity="0.9"/>
+                </svg>
+            </div>
+            <!-- Daun emerald kanan tengah (melayang naik) -->
+            <div class="floating-blossom" style="bottom:12%;right:6%;animation-duration:13s;animation-delay:2s;">
+                <svg width="30" height="30" viewBox="0 0 100 100" class="opacity-40">
+                    <path d="M50 0 C75 25 75 75 50 100 C25 75 25 25 50 0 Z" fill="#2D9C68"/>
+                    <line x1="50" y1="10" x2="50" y2="90" stroke="#1B6443" stroke-width="4" opacity="0.5"/>
+                </svg>
+            </div>
+            <!-- Petal pink kiri bawah -->
+            <div class="floating-blossom" style="bottom:5%;left:20%;animation-duration:15s;animation-delay:1s;">
+                <svg width="26" height="26" viewBox="0 0 100 100" class="opacity-45">
+                    <ellipse cx="50" cy="50" rx="34" ry="19" fill="#F9A8D4" transform="rotate(-25 50 50)"/>
+                    <ellipse cx="50" cy="50" rx="18" ry="10" fill="#FDF2F8"/>
+                </svg>
+            </div>
+            <!-- 4-petal bloom kanan atas -->
+            <div class="swaying-blossom" style="top:10%;right:8%;animation-duration:9s;animation-delay:4s;">
+                <svg width="32" height="32" viewBox="0 0 100 100" class="opacity-30">
+                    <circle cx="50" cy="28" r="20" fill="#A7F3D0" opacity="0.7"/>
+                    <circle cx="72" cy="50" r="20" fill="#A7F3D0" opacity="0.7"/>
+                    <circle cx="50" cy="72" r="20" fill="#A7F3D0" opacity="0.7"/>
+                    <circle cx="28" cy="50" r="20" fill="#A7F3D0" opacity="0.7"/>
+                    <circle cx="50" cy="50" r="10" fill="#2D9C68" opacity="0.8"/>
+                </svg>
+            </div>
+            <!-- Pink glow blob kiri -->
+            <div class="absolute top-0 left-0 w-72 h-72 rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(244,114,182,0.12) 0%,transparent 70%);filter:blur(50px);"></div>
+            <!-- Emerald glow blob kanan bawah -->
+            <div class="absolute bottom-0 right-0 w-72 h-72 rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(45,156,104,0.13) 0%,transparent 70%);filter:blur(50px);"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8">
+                <div>
+                    <span class="text-emerald-700 font-bold text-xs tracking-widest uppercase">Koleksi Terfavorit</span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mt-1">Pilih Kategori Bunga</h2>
+                </div>
+                <a href="#katalog-harga" class="text-emerald-700 hover:text-emerald-900 font-bold text-sm inline-flex items-center gap-1.5 mt-2 sm:mt-0">
+                    <span>Lihat Semua Katalog</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <!-- Categories Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                
+                <!-- Cat 1 -->
+                <button onclick="filterFromCategoryCard('buket')" class="group p-5 rounded-2xl bg-emerald-50/50 hover:bg-emerald-100/70 border border-emerald-100 text-center transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-white shadow-sm flex items-center justify-center text-emerald-800 group-hover:scale-110 transition duration-300">
+                        <i data-lucide="flower-2" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-bold text-stone-800 text-sm mt-3">Custom Bouquet</h3>
+                    <p class="text-[11px] text-stone-500 mt-0.5">Buket Tangan Modern</p>
+                </button>
+
+                <!-- Cat 2 -->
+                <button onclick="filterFromCategoryCard('wisuda')" class="group p-5 rounded-2xl bg-emerald-50/50 hover:bg-emerald-100/70 border border-emerald-100 text-center transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-white shadow-sm flex items-center justify-center text-emerald-800 group-hover:scale-110 transition duration-300">
+                        <i data-lucide="graduation-cap" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-bold text-stone-800 text-sm mt-3">Buket Wisuda</h3>
+                    <p class="text-[11px] text-stone-500 mt-0.5">Hadiah Kelulusan Jogja</p>
+                </button>
+
+                <!-- Cat 3 -->
+                <button onclick="filterFromCategoryCard('box-vas')" class="group p-5 rounded-2xl bg-emerald-50/50 hover:bg-emerald-100/70 border border-emerald-100 text-center transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-white shadow-sm flex items-center justify-center text-emerald-800 group-hover:scale-110 transition duration-300">
+                        <i data-lucide="package" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-bold text-stone-800 text-sm mt-3">Bloom Box & Vas</h3>
+                    <p class="text-[11px] text-stone-500 mt-0.5">Hiasan Meja Eksklusif</p>
+                </button>
+
+                <!-- Cat 4 -->
+                <button onclick="filterFromCategoryCard('money')" class="group p-5 rounded-2xl bg-emerald-50/50 hover:bg-emerald-100/70 border border-emerald-100 text-center transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-white shadow-sm flex items-center justify-center text-emerald-800 group-hover:scale-110 transition duration-300">
+                        <i data-lucide="banknote" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-bold text-stone-800 text-sm mt-3">Money Bouquet</h3>
+                    <p class="text-[11px] text-stone-500 mt-0.5">Buket Uang Elegan</p>
+                </button>
+
+                <!-- Cat 5 -->
+                <button onclick="filterFromCategoryCard('standing')" class="group p-5 rounded-2xl bg-emerald-50/50 hover:bg-emerald-100/70 border border-emerald-100 text-center transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-white shadow-sm flex items-center justify-center text-emerald-800 group-hover:scale-110 transition duration-300">
+                        <i data-lucide="award" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-bold text-stone-800 text-sm mt-3">Standing Flower</h3>
+                    <p class="text-[11px] text-stone-500 mt-0.5">Grand Opening & Acara</p>
+                </button>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- KATALOG PRODUK LENGKAP DENGAN FILTER & QUICK ORDER -->
+    <!-- ============================================================= -->
+    <section id="katalog-harga" class="py-20 floral-section-bg floral-pink-bg">
+
+        <!-- Floral Animations: Katalog Produk -->
+        <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+            <!-- Mawar pink kiri atas (swaying) -->
+            <div class="swaying-blossom" style="top:5%;left:5%;animation-duration:10s;">
+                <svg width="44" height="44" viewBox="0 0 100 100" class="opacity-35">
+                    <circle cx="50" cy="50" r="13" fill="#F472B6" opacity="0.6"/>
+                    <circle cx="50" cy="28" r="15" fill="#FBCFE8" opacity="0.7"/>
+                    <circle cx="72" cy="50" r="15" fill="#FBCFE8" opacity="0.7"/>
+                    <circle cx="50" cy="72" r="15" fill="#FBCFE8" opacity="0.7"/>
+                    <circle cx="28" cy="50" r="15" fill="#FBCFE8" opacity="0.7"/>
+                    <circle cx="50" cy="50" r="7"  fill="#F59E0B" opacity="0.9"/>
+                </svg>
+            </div>
+            <!-- Daun emerald kiri tengah (floating up) -->
+            <div class="floating-blossom" style="bottom:15%;left:8%;animation-duration:16s;animation-delay:1s;">
+                <svg width="32" height="32" viewBox="0 0 100 100" class="opacity-40">
+                    <path d="M50 0 C75 25 75 75 50 100 C25 75 25 25 50 0 Z" fill="#2D9C68"/>
+                    <line x1="50" y1="10" x2="50" y2="90" stroke="#1B6443" stroke-width="4" opacity="0.5"/>
+                </svg>
+            </div>
+            <!-- Sakura kanan atas (swaying) -->
+            <div class="swaying-blossom" style="top:8%;right:5%;animation-duration:12s;animation-delay:3s;">
+                <svg width="38" height="38" viewBox="0 0 100 100" class="opacity-30">
+                    <circle cx="50" cy="30" r="13" fill="#FDA4AF" opacity="0.85"/>
+                    <circle cx="70" cy="50" r="13" fill="#FDA4AF" opacity="0.85"/>
+                    <circle cx="50" cy="70" r="13" fill="#FDA4AF" opacity="0.85"/>
+                    <circle cx="30" cy="50" r="13" fill="#FDA4AF" opacity="0.85"/>
+                    <circle cx="50" cy="50" r="7"  fill="#FDE68A" opacity="0.9"/>
+                </svg>
+            </div>
+            <!-- Petal pink kanan bawah (floating) -->
+            <div class="floating-blossom" style="bottom:8%;right:10%;animation-duration:14s;animation-delay:5s;">
+                <svg width="28" height="28" viewBox="0 0 100 100" class="opacity-45">
+                    <ellipse cx="50" cy="50" rx="34" ry="19" fill="#F9A8D4" transform="rotate(20 50 50)"/>
+                    <ellipse cx="50" cy="50" rx="18" ry="10" fill="#FDF2F8"/>
+                </svg>
+            </div>
+            <!-- 4-petal bloom emerald center-right (floating) -->
+            <div class="floating-blossom" style="bottom:30%;right:3%;animation-duration:18s;animation-delay:7s;">
+                <svg width="30" height="30" viewBox="0 0 100 100" class="opacity-30">
+                    <circle cx="50" cy="28" r="20" fill="#A7F3D0" opacity="0.7"/>
+                    <circle cx="72" cy="50" r="20" fill="#A7F3D0" opacity="0.7"/>
+                    <circle cx="50" cy="72" r="20" fill="#A7F3D0" opacity="0.7"/>
+                    <circle cx="28" cy="50" r="20" fill="#A7F3D0" opacity="0.7"/>
+                    <circle cx="50" cy="50" r="10" fill="#2D9C68" opacity="0.8"/>
+                </svg>
+            </div>
+            <!-- Pink glow kanan atas -->
+            <div class="absolute top-0 right-0 w-96 h-96 rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(244,114,182,0.14) 0%,transparent 70%);filter:blur(60px);"></div>
+            <!-- Emerald glow kiri bawah -->
+            <div class="absolute bottom-0 left-0 w-96 h-96 rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(45,156,104,0.14) 0%,transparent 70%);filter:blur(60px);"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-emerald-700 font-bold text-xs tracking-widest uppercase">Fresh Artificial Picks</span>
+                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-900 mt-2">Katalog & Daftar Harga</h2>
+                <p class="text-stone-600 text-base mt-3">Seluruh pesanan dibuat dengan teliti oleh tim florist Charlotte. Bebas kustomisasi warna bunga, kertas wrapping, dan kartu ucapan.</p>
+            </div>
+
+            <!-- Filter Buttons Container -->
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12" id="category-filter-buttons">
+                <!-- Injected via JavaScript -->
+            </div>
+
+            <!-- Products Grid Container -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7" id="product-grid">
+                <!-- Injected via JavaScript -->
+            </div>
+
+            <!-- Custom Order Banner -->
+            <div class="mt-14 bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-950 rounded-3xl p-8 sm:p-12 text-white shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8 border border-emerald-700/50">
+                <div class="space-y-3 text-center lg:text-left max-w-2xl">
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-300">Punya Konsep Sendiri?</span>
+                    <h3 class="font-serif text-2xl sm:text-3xl font-bold">Layanan Custom Bouquet Impian Anda</h3>
+                    <p class="text-sm text-emerald-100 leading-relaxed">
+                        Kirimkan referensi foto bunga dari Pinterest atau Instagram kepada kami. Florist kami siap merangkainya sesuai preferensi budget, tema warna, dan ukuran yang Anda inginkan.
+                    </p>
+                </div>
+                <a href="https://wa.me/6282242260047?text=Halo%20Charlotte%20Flower,%20saya%20ingin%20konsultasi%20custom%20rangkaian%20bunga" 
+                   target="_blank"
+                   class="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-stone-950 font-extrabold px-8 py-4 rounded-full shadow-lg transition-all transform hover:scale-105 flex-shrink-0">
+                    <i data-lucide="message-circle" class="w-5 h-5"></i>
+                    <span>Konsultasi Custom via WA</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- COMPANY PROFILE (Tentang Kami) -->
+    <!-- ============================================================= -->
+    <section id="tentang-kami" class="py-20 floral-section-bg floral-emerald-bg border-t border-emerald-100">
+
+        <!-- Floral Animations: Tentang Kami -->
+        <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+            <!-- Daun emerald kiri atas (floating up) -->
+            <div class="floating-blossom" style="bottom:20%;left:3%;animation-duration:14s;animation-delay:0s;">
+                <svg width="38" height="38" viewBox="0 0 100 100" class="opacity-40">
+                    <path d="M50 0 C80 30 80 70 50 100 C20 70 20 30 50 0 Z" fill="#2D9C68"/>
+                    <line x1="50" y1="10" x2="50" y2="90" stroke="#1B6443" stroke-width="4" opacity="0.5"/>
+                </svg>
+            </div>
+            <!-- Mawar pink kanan atas (swaying) -->
+            <div class="swaying-blossom" style="top:7%;right:5%;animation-duration:10s;animation-delay:2s;">
+                <svg width="40" height="40" viewBox="0 0 100 100" class="opacity-32">
+                    <circle cx="50" cy="28" r="15" fill="#FBCFE8" opacity="0.75"/>
+                    <circle cx="72" cy="50" r="15" fill="#FBCFE8" opacity="0.75"/>
+                    <circle cx="50" cy="72" r="15" fill="#FBCFE8" opacity="0.75"/>
+                    <circle cx="28" cy="50" r="15" fill="#FBCFE8" opacity="0.75"/>
+                    <circle cx="50" cy="50" r="8"  fill="#F59E0B" opacity="0.85"/>
+                </svg>
+            </div>
+            <!-- Sakura kecil kiri bawah (floating) -->
+            <div class="floating-blossom" style="bottom:5%;left:30%;animation-duration:17s;animation-delay:4s;">
+                <svg width="26" height="26" viewBox="0 0 100 100" class="opacity-40">
+                    <circle cx="50" cy="30" r="13" fill="#FDA4AF" opacity="0.8"/>
+                    <circle cx="70" cy="50" r="13" fill="#FDA4AF" opacity="0.8"/>
+                    <circle cx="50" cy="70" r="13" fill="#FDA4AF" opacity="0.8"/>
+                    <circle cx="30" cy="50" r="13" fill="#FDA4AF" opacity="0.8"/>
+                    <circle cx="50" cy="50" r="6"  fill="#FDE68A" opacity="0.9"/>
+                </svg>
+            </div>
+            <!-- 4-petal bloom emerald kanan tengah (swaying) -->
+            <div class="swaying-blossom" style="top:40%;right:4%;animation-duration:13s;animation-delay:6s;">
+                <svg width="34" height="34" viewBox="0 0 100 100" class="opacity-30">
+                    <circle cx="50" cy="28" r="20" fill="#A7F3D0" opacity="0.65"/>
+                    <circle cx="72" cy="50" r="20" fill="#A7F3D0" opacity="0.65"/>
+                    <circle cx="50" cy="72" r="20" fill="#A7F3D0" opacity="0.65"/>
+                    <circle cx="28" cy="50" r="20" fill="#A7F3D0" opacity="0.65"/>
+                    <circle cx="50" cy="50" r="10" fill="#2D9C68" opacity="0.8"/>
+                </svg>
+            </div>
+            <!-- Emerald glow kiri atas -->
+            <div class="absolute top-0 left-0 w-80 h-80 rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(45,156,104,0.15) 0%,transparent 70%);filter:blur(55px);"></div>
+            <!-- Pink glow kanan bawah -->
+            <div class="absolute bottom-0 right-0 w-80 h-80 rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(244,114,182,0.13) 0%,transparent 70%);filter:blur(55px);"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left: Profile Imagery -->
+                <div class="lg:col-span-5 relative order-2 lg:order-1">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <div class="absolute -top-4 -left-4 w-full h-full rounded-3xl bg-emerald-100 transform -rotate-2"></div>
+                        <div class="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white">
+                            <img id="about-image" src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=900&q=80" alt="Florist merangkai bunga Charlotte Flower" class="w-full h-[460px] object-cover">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Company Profile Text -->
+                <div class="lg:col-span-7 space-y-6 order-1 lg:order-2">
+                    <span class="text-emerald-700 font-bold text-xs tracking-widest uppercase">Company Profile</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-900" id="about-title">Tentang Charlotte Flower</h2>
+                    <p class="text-stone-700 text-lg font-medium" id="about-subtitle">Keindahan Abadi dengan Sentuhan Seni Floral Kontemporer</p>
+                    
+                    <div class="space-y-4 text-stone-600 leading-relaxed text-sm sm:text-base">
+                        <p id="about-desc1">
+                            Charlotte Flower adalah butik bunga artificial modern di Yogyakarta yang mendedikasikan karya seni untuk merayakan setiap rasa dan cerita. Berbeda dari bunga segar yang layu dalam beberapa hari, rangkaian premium artificial flower kami dirancang agar tetap mekar anggun selamanya sebagai memorabilia berharga.
+                        </p>
+                        <p id="about-desc2">
+                            Setiap kuntum dipilih dari material kain dan sutra bertekstur alami (real-touch), dirangkai secara teliti oleh perangkai bunga berpengalaman menggunakan teknik Korean wrapping yang minimalis dan mewah.
+                        </p>
+                    </div>
+
+                    <!-- Vision & Mission Mini Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div class="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-100">
+                            <h4 class="font-bold text-emerald-900 text-sm flex items-center gap-2">
+                                <i data-lucide="eye" class="w-4 h-4 text-emerald-700"></i>
+                                <span>Visi Kami</span>
+                            </h4>
+                            <p class="text-xs text-stone-600 mt-1.5 leading-relaxed" id="about-vision">
+                                Menjadi destinasi florist artificial pilihan utama di Yogyakarta dan sekitarnya yang dipercaya menghadirkan kebahagiaan di setiap wisuda, ulang tahun, dan pernikahan.
+                            </p>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-100">
+                            <h4 class="font-bold text-emerald-900 text-sm flex items-center gap-2">
+                                <i data-lucide="target" class="w-4 h-4 text-emerald-700"></i>
+                                <span>Misi Kami</span>
+                            </h4>
+                            <p class="text-xs text-stone-600 mt-1.5 leading-relaxed" id="about-mission">
+                                Menghadirkan rangkaian bunga artificial berkualitas tinggi, layanan ramah, pengerjaan rapi, dan pengiriman tepat waktu di seluruh area Jogja.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Order Section -->
+    <section class="py-16 floral-section-bg floral-order-bg border-y border-emerald-100/60">
+
+        <!-- Floral Animations: Cara Memesan -->
+        <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+            <!-- Petal kiri atas (swaying) -->
+            <div class="swaying-blossom" style="top:8%;left:5%;animation-duration:12s;">
+                <svg width="30" height="30" viewBox="0 0 100 100" class="opacity-30">
+                    <ellipse cx="50" cy="50" rx="34" ry="19" fill="#F9A8D4" transform="rotate(-20 50 50)"/>
+                    <ellipse cx="50" cy="50" rx="18" ry="10" fill="#FDF2F8"/>
+                </svg>
+            </div>
+            <!-- Daun emerald kanan bawah (floating) -->
+            <div class="floating-blossom" style="bottom:8%;right:6%;animation-duration:15s;animation-delay:3s;">
+                <svg width="28" height="28" viewBox="0 0 100 100" class="opacity-35">
+                    <path d="M50 0 C75 25 75 75 50 100 C25 75 25 25 50 0 Z" fill="#2D9C68"/>
+                    <line x1="50" y1="10" x2="50" y2="90" stroke="#1B6443" stroke-width="3" opacity="0.5"/>
+                </svg>
+            </div>
+            <!-- Pink glow centre -->
+            <div class="absolute top-0 right-1/4 w-64 h-64 rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(249,168,212,0.1) 0%,transparent 70%);filter:blur(45px);"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-charlotte-600 font-semibold text-xs tracking-widest uppercase">Langkah Mudah</span>
+                <h2 class="font-serif text-3xl font-bold text-stone-900 mt-2">Cara Memesan di Charlotte</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                <!-- Step 1 -->
+                <div class="text-center relative">
+                    <div class="w-16 h-16 rounded-full bg-white text-charlotte-600 font-serif font-bold text-xl flex items-center justify-center mx-auto shadow-md border-2 border-charlotte-200 mb-4">
+                        1
+                    </div>
+                    <h4 class="font-bold text-stone-900 mb-1">Pilih Rangkaian</h4>
+                    <p class="text-xs text-stone-600">Pilih dari katalog kami atau berikan referensi bunga yang Anda inginkan.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="text-center relative">
+                    <div class="w-16 h-16 rounded-full bg-white text-charlotte-600 font-serif font-bold text-xl flex items-center justify-center mx-auto shadow-md border-2 border-charlotte-200 mb-4">
+                        2
+                    </div>
+                    <h4 class="font-bold text-stone-900 mb-1">Konsultasi</h4>
+                    <p class="text-xs text-stone-600">Diskusikan detail waktu pengiriman dan tuliskan pesan untuk kartu ucapan gratis.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="text-center relative">
+                    <div class="w-16 h-16 rounded-full bg-white text-charlotte-600 font-serif font-bold text-xl flex items-center justify-center mx-auto shadow-md border-2 border-charlotte-200 mb-4">
+                        3
+                    </div>
+                    <h4 class="font-bold text-stone-900 mb-1">Foto Hasil Jadi</h4>
+                    <p class="text-xs text-stone-600">Kami mengirimkan foto dan video rangkaian sebelum dikirim untuk approval Anda.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="text-center relative">
+                    <div class="w-16 h-16 rounded-full bg-white text-charlotte-600 font-serif font-bold text-xl flex items-center justify-center mx-auto shadow-md border-2 border-charlotte-200 mb-4">
+                        4
+                    </div>
+                    <h4 class="font-bold text-stone-900 mb-1">Pengiriman Aman</h4>
+                    <p class="text-xs text-stone-600">Bunga dikirim dengan aman, tepat waktu dan hati-hati.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- LOKASI & KONTAK TOKO INTERAKTIF -->
+    <!-- ============================================================= -->
+    <section id="lokasi" class="py-20 bg-white border-t border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-emerald-700 font-bold text-xs tracking-widest uppercase">Kunjungi Toko Kami</span>
+                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-900 mt-2">Lokasi & Kontak Charlotte Flower</h2>
+                <p class="text-stone-600 text-base mt-2">Melayani pemesanan langsung di toko atau pengiriman same-day ke seluruh penjuru Yogyakarta.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Contact & Store Info (Col 5) -->
+                <div class="lg:col-span-5 space-y-6">
+                    
+                    <!-- Main Store Card -->
+                    <div class="bg-white p-7 rounded-3xl shadow-sm border border-emerald-100 space-y-6">
+                        
+                        <!-- Address -->
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="map-pin" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-stone-900 text-base">Alamat Toko</h3>
+                                <p id="site-address-text" class="text-stone-600 text-sm mt-1 leading-relaxed">
+                                    <strong>Charlotte Flower</strong><br>
+                                    Ds Sumber No 0 RT 4 RW 12, Balecatur, Gamping, Sleman, Daerah Istimewa Yogyakarta
+                                </p>
+                                <span id="site-address-note" class="inline-block mt-2 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
+                                    Ds Sumber No. 0 RT 4 RW 12, Balecatur, Gamping
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Opening Hours -->
+                        <div class="flex items-start gap-4 pt-4 border-t border-stone-100">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="clock" class="w-6 h-6"></i>
+                            </div>
+                            <div class="w-full">
+                                <h3 class="font-bold text-stone-900 text-base">Jam Operasional</h3>
+                                <div class="text-sm text-stone-600 mt-1 space-y-1">
+                                    <div class="flex justify-between">
+                                        <span>Setiap Hari:</span>
+                                        <span id="site-hours-weekday" class="font-bold text-stone-900">08:00 - 20:00 WIB</span>
+                                    </div>
+                             
+                                    <div class="flex justify-between text-emerald-700 font-bold pt-1">
+                                        <span>Pemesanan Online:</span>
+                                        <span>24 Jam via WhatsApp</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Direct Contact List -->
+                        <div class="flex items-start gap-4 pt-4 border-t border-stone-100">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="phone-call" class="w-6 h-6"></i>
+                            </div>
+                            <div class="w-full space-y-2">
+                                <h3 class="font-bold text-stone-900 text-base">Hubungi Kami</h3>
+                                <p class="text-sm text-stone-600">
+                                    WhatsApp: <a id="site-contact-wa" href="https://wa.me/6282242260047" target="_blank" class="text-emerald-800 font-bold hover:underline">+62 822-4226-0047</a>
+                                </p>
+                                <p class="text-sm text-stone-600">
+                                    Email: <a id="site-contact-email" href="mailto:charlotteflowerid@gmail.com" class="text-stone-900 font-medium hover:underline">charlotteflowerid@gmail.com</a>
+                                </p>
+                                <p class="text-sm text-stone-600">
+                                    Instagram: <a id="site-contact-instagram" href="https://www.instagram.com/charlotteflower.id" target="_blank" class="text-emerald-700 font-medium hover:underline">@charlotteflower.id</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons inside card -->
+                        <div class="pt-2 flex flex-col sm:flex-row gap-3">
+                            <a id="btn-maps-nav" href="https://maps.app.goo.gl/FbruK7o3sbdPec736" 
+                               target="_blank"
+                               class="flex-1 inline-flex items-center justify-center gap-2 bg-stone-900 hover:bg-stone-800 text-white text-xs sm:text-sm font-semibold py-3 px-4 rounded-xl transition shadow">
+                                <i data-lucide="navigation" class="w-4 h-4 text-emerald-400"></i>
+                                <span>Petunjuk Arah (Maps)</span>
+                            </a>
+                            <a href="https://wa.me/6282242260047?text=Halo%20Charlotte%20Flower,%20saya%20mau%20tanya%20lokasi%20toko" 
+                               target="_blank"
+                               class="flex-1 inline-flex items-center justify-center gap-2 bg-emerald-800 hover:bg-emerald-900 text-white text-xs sm:text-sm font-semibold py-3 px-4 rounded-xl transition shadow">
+                                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                                <span>Chat Admin</span>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Interactive Google Map Embed (Col 7) -->
+                <div class="lg:col-span-7">
+                    <div class="bg-white p-3 rounded-3xl shadow-sm border border-emerald-100 overflow-hidden">
+                        <div class="relative w-full h-[450px] lg:h-[530px] rounded-2xl overflow-hidden">
+                            <!-- Embedded Google Maps Charlotte Flower -->
+                            <iframe 
+                                id="site-map-iframe"
+                                title="Peta Lokasi Charlotte Flower Jogja"
+                                src="https://maps.google.com/maps?q=-7.7985641,110.2943901+(Charlotte+Flower)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" 
+                                class="w-full h-full border-0" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                            
+                            <!-- Overlay Pill on Map -->
+                            <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-4 py-2 rounded-xl shadow-lg border border-stone-200 flex items-center gap-2 text-xs font-semibold text-stone-800">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                <span>Toko Buka Sekarang (Tutup 20.00)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- FOOTER -->
+    <!-- ============================================================= -->
+    <footer class="bg-emerald-950 text-white pt-16 pb-12 border-t border-emerald-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-emerald-800/60">
+                
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="gambar/logocharlotte.png" alt="Charlotte Flower Logo" class="h-12 sm:h-14 w-auto object-contain filter drop-shadow">
+                    </div>
+                    <p class="text-sm text-emerald-200/80 leading-relaxed">
+                        Modern artificial flower di Yogyakarta. Menghadirkan karya seni floral abadi untuk wisuda, hadiah ulang tahun, dan dekorasi ruang berestetika tinggi.
+                    </p>
+                    <div class="flex items-center space-x-3 pt-2">
+                        <a href="https://www.instagram.com/charlotteflower.id" target="_blank" class="w-9 h-9 rounded-full bg-emerald-900 hover:bg-emerald-700 text-emerald-200 hover:text-white flex items-center justify-center transition" aria-label="Instagram">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://wa.me/6282242260047" target="_blank" class="w-9 h-9 rounded-full bg-emerald-900 hover:bg-emerald-700 text-emerald-200 hover:text-white flex items-center justify-center transition" aria-label="WhatsApp">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        </a>
+                        <a href="mailto:charlotteflowerid@gmail.com" class="w-9 h-9 rounded-full bg-emerald-900 hover:bg-emerald-700 text-emerald-200 hover:text-white flex items-center justify-center transition" aria-label="Email">
+                            <i data-lucide="mail" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigasi Cepat -->
+                <div>
+                    <h4 class="font-serif text-base font-semibold text-white mb-4">Navigasi Halaman</h4>
+                    <ul class="space-y-2 text-sm text-emerald-200/80">
+                        <li><a href="#beranda" class="hover:text-emerald-300 transition">Beranda</a></li>
+                        <li><a href="#kategori" class="hover:text-emerald-300 transition">Kategori Pilihan</a></li>
+                        <li><a href="#katalog-harga" class="hover:text-emerald-300 transition">Katalog Produk & Harga</a></li>
+                        <li><a href="#tentang-kami" class="hover:text-emerald-300 transition">Tentang Kami</a></li>
+                        <li><a href="#lokasi" class="hover:text-emerald-300 transition">Lokasi Toko</a></li>
+                        <li class="pt-2"><a href="admin.html" target="_blank" class="hover:text-amber-300 text-emerald-400 font-semibold transition flex items-center gap-1.5"><i data-lucide="shield" class="w-3.5 h-3.5"></i><span>Admin Dashboard</span></a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Kategori Favorit -->
+                <div>
+                    <h4 class="font-serif text-base font-semibold text-white mb-4">Kategori Favorit</h4>
+                    <ul class="space-y-2 text-sm text-emerald-200/80">
+                        <li><a href="#katalog-harga" onclick="filterFromCategoryCard('wisuda')" class="hover:text-emerald-300 transition">Buket Wisuda UGM & UNY</a></li>
+                        <li><a href="#katalog-harga" onclick="filterFromCategoryCard('buket')" class="hover:text-emerald-300 transition">Buket Ulang Tahun & Anniversary</a></li>
+                        <li><a href="#katalog-harga" onclick="filterFromCategoryCard('box-vas')" class="hover:text-emerald-300 transition">Bloom Box & Vas Meja</a></li>
+                        <li><a href="#katalog-harga" onclick="filterFromCategoryCard('money')" class="hover:text-emerald-300 transition">Buket Uang Custom</a></li>
+                        <li><a href="#katalog-harga" onclick="filterFromCategoryCard('standing')" class="hover:text-emerald-300 transition">Standing Flower Grand Opening</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Jam & Alamat Butik -->
+                <div>
+                    <h4 class="font-serif text-base font-semibold text-white mb-4">Lokasi Kami</h4>
+                    <p class="text-sm text-emerald-200/80 leading-relaxed">
+                        Ds Sumber No 0 RT 4 RW 12, Balecatur, Gamping, Sleman, Yogyakarta<br><br>
+                        <span class="text-white font-medium">Jam Buka Toko:</span><br>
+                        Setiap Hari: 08.00 - 20.00 WIB
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-300/60 gap-4">
+                <p>&copy; 2026 Charlotte Flower. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <span>Modern Artificial Florist</span>
+                    <span>Handcrafted in Jogja</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Pill Button -->
+    <a href="https://wa.me/6282242260047?text=Halo%20Charlotte%20Flower,%20saya%20ingin%20pesan%20bunga" 
+       target="_blank"
+       aria-label="Chat WhatsApp Langsung"
+       class="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 bg-emerald-800 hover:bg-emerald-900 text-white font-semibold py-3 px-5 rounded-full shadow-2xl hover:shadow-emerald-900/40 transition-all duration-300 transform hover:scale-105 group border-2 border-white/20">
+        <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+        </span>
+        <i data-lucide="message-circle" class="w-5 h-5"></i>
+        <span class="text-sm hidden sm:inline">Pesan via WhatsApp</span>
+    </a>
+
+    <!-- ============================================================= -->
+    <!-- ARTICLE MODAL (Untuk Membaca Artikel Lengkap) -->
+    <!-- ============================================================= -->
+    <div id="article-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/70 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-stone-200 transform transition-all p-6 sm:p-8 relative">
+            <button onclick="closeArticleModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 flex items-center justify-center transition">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div id="article-modal-content">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- JAVASCRIPT LOGIC -->
+    <!-- ============================================================= -->
+    <script>
+        // Data State
+        let siteData = getCharlotteData();
+        let currentSlide = 0;
+        let slideTimer = null;
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Hero Image Slider Logic
+        function switchHeroSlide(index) {
+            if (!siteData.general.heroImages || siteData.general.heroImages.length === 0) return;
+            currentSlide = (index + siteData.general.heroImages.length) % siteData.general.heroImages.length;
+            const imgData = siteData.general.heroImages[currentSlide];
+
+            const mainImg = document.getElementById('hero-main-img');
+            const captionTitle = document.getElementById('hero-caption-title');
+            const badgeTag = document.getElementById('hero-badge-tag');
+
+            if (mainImg) {
+                mainImg.style.opacity = '0.3';
+                mainImg.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    mainImg.src = imgData.url;
+                    mainImg.alt = imgData.title;
+                    mainImg.style.opacity = '1';
+                    mainImg.style.transform = 'scale(1)';
+                }, 200);
+            }
+            if (captionTitle) captionTitle.innerText = imgData.title;
+            if (badgeTag) badgeTag.innerText = imgData.tag || 'Signature Style';
+
+            // Update dot styles
+            document.querySelectorAll('.hero-dot').forEach((dot, i) => {
+                if (i === currentSlide) {
+                    dot.classList.add('bg-emerald-800', 'text-white');
+                    dot.classList.remove('bg-white', 'text-stone-600');
+                } else {
+                    dot.classList.remove('bg-emerald-800', 'text-white');
+                    dot.classList.add('bg-white', 'text-stone-600');
+                }
+            });
+        }
+
+        function startHeroAutoSlide() {
+            if (slideTimer) clearInterval(slideTimer);
+            slideTimer = setInterval(() => {
+                switchHeroSlide(currentSlide + 1);
+            }, 5000);
+        }
+
+        // Render Dynamic Site Elements
+        function renderSite() {
+            siteData = getCharlotteData();
+
+            // Announcement (Marquee)
+            const annBar = document.getElementById('site-announcement-bar');
+            if (annBar && !siteData.announcement.enabled) {
+                annBar.style.display = 'none';
+            } else if (annBar) {
+                annBar.style.display = 'block';
+                const annText1 = document.getElementById('site-announcement-text-1');
+                const annCode1 = document.getElementById('site-announcement-code-1');
+                const annText2 = document.getElementById('site-announcement-text-2');
+                const annCode2 = document.getElementById('site-announcement-code-2');
+                if (annText1 && siteData.announcement.text) annText1.innerText = siteData.announcement.text;
+                if (annCode1 && siteData.announcement.code) annCode1.innerText = siteData.announcement.code;
+                if (annText2 && siteData.announcement.text) annText2.innerText = siteData.announcement.text;
+                if (annCode2 && siteData.announcement.code) annCode2.innerText = siteData.announcement.code;
+            }
+
+            // WhatsApp link sync for all wa.me links
+            const waNumber = siteData.general.whatsapp || "6282242260047";
+            document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+                try {
+                    const url = new URL(link.href);
+                    const textParam = url.searchParams.get('text') || '';
+                    link.href = `https://wa.me/${waNumber}?text=${encodeURIComponent(textParam)}`;
+                } catch(e) {}
+            });
+
+            // Store info & contacts
+            const contactWA = document.getElementById('site-contact-wa');
+            if (contactWA) {
+                contactWA.href = `https://wa.me/${waNumber}`;
+                contactWA.innerText = `+${waNumber.replace(/(\d{2})(\d{3})(\d{4})(\d+)/, '$1 $2-$3-$4')}`;
+            }
+            const contactEmail = document.getElementById('site-contact-email');
+            if (contactEmail && siteData.general.email) {
+                contactEmail.href = `mailto:${siteData.general.email}`;
+                contactEmail.innerText = siteData.general.email;
+            }
+            const contactInstagram = document.getElementById('site-contact-instagram');
+            if (contactInstagram && siteData.general.instagram) {
+                contactInstagram.innerText = siteData.general.instagram;
+            }
+            const addressText = document.getElementById('site-address-text');
+            if (addressText && siteData.general.address) {
+                addressText.innerHTML = `<strong>${siteData.general.storeName || 'Charlotte Flower'}</strong><br>${siteData.general.address}`;
+            }
+            const addressNote = document.getElementById('site-address-note');
+            if (addressNote) {
+                if (siteData.general.addressNote) {
+                    addressNote.innerText = siteData.general.addressNote;
+                    addressNote.style.display = 'inline-block';
+                } else {
+                    addressNote.style.display = 'none';
+                }
+            }
+            const hoursWeekday = document.getElementById('site-hours-weekday');
+            if (hoursWeekday && siteData.general.openingWeekday) hoursWeekday.innerText = siteData.general.openingWeekday;
+            const hoursWeekend = document.getElementById('site-hours-weekend');
+            if (hoursWeekend && siteData.general.openingWeekend) hoursWeekend.innerText = siteData.general.openingWeekend;
+
+            // Map Embed URL
+            const mapIframe = document.getElementById('site-map-iframe');
+            if (mapIframe && siteData.general.mapEmbedUrl) {
+                mapIframe.src = siteData.general.mapEmbedUrl;
+            }
+            const btnMaps = document.getElementById('btn-maps-nav');
+            if (btnMaps && siteData.general.mapUrl) {
+                btnMaps.href = siteData.general.mapUrl;
+            }
+
+            // About section
+            const aboutTitle = document.getElementById('about-title');
+            if (aboutTitle && siteData.about.title) aboutTitle.innerText = siteData.about.title;
+            const aboutSubtitle = document.getElementById('about-subtitle');
+            if (aboutSubtitle && siteData.about.subtitle) aboutSubtitle.innerText = siteData.about.subtitle;
+            const aboutDesc1 = document.getElementById('about-desc1');
+            if (aboutDesc1 && siteData.about.desc1) aboutDesc1.innerText = siteData.about.desc1;
+            const aboutDesc2 = document.getElementById('about-desc2');
+            if (aboutDesc2 && siteData.about.desc2) aboutDesc2.innerText = siteData.about.desc2;
+            const aboutVision = document.getElementById('about-vision');
+            if (aboutVision && siteData.about.vision) aboutVision.innerText = siteData.about.vision;
+            const aboutMission = document.getElementById('about-mission');
+            if (aboutMission && siteData.about.mission) aboutMission.innerText = siteData.about.mission;
+            const aboutImg = document.getElementById('about-image');
+            if (aboutImg && siteData.about.aboutImage) aboutImg.src = siteData.about.aboutImage;
+
+            // Render Category Filter Buttons
+            renderCategoryFilters();
+
+            // Render Products Grid
+            renderProducts('all');
+
+            // Render Articles Grid
+            renderArticles();
+
+            lucide.createIcons();
+        }
+
+        // Render Category Filter Pills
+        function renderCategoryFilters() {
+            const container = document.getElementById('category-filter-buttons');
+            if (!container) return;
+            container.innerHTML = '';
+
+            siteData.categories.forEach((cat, idx) => {
+                const btn = document.createElement('button');
+                btn.className = `filter-pill px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all ${idx === 0 ? 'bg-emerald-800 text-white shadow-md' : 'bg-white text-stone-700 border border-stone-200 hover:bg-emerald-50'}`;
+                btn.setAttribute('data-category', cat.id);
+                btn.innerText = cat.name;
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-pill').forEach(b => {
+                        b.classList.remove('bg-emerald-800', 'text-white', 'shadow-md');
+                        b.classList.add('bg-white', 'text-stone-700', 'border', 'border-stone-200');
+                    });
+                    btn.classList.add('bg-emerald-800', 'text-white', 'shadow-md');
+                    btn.classList.remove('bg-white', 'text-stone-700', 'border', 'border-stone-200');
+                    renderProducts(cat.id);
+                });
+                container.appendChild(btn);
+            });
+        }
+
+        function filterFromCategoryCard(categoryId) {
+            const targetBtn = document.querySelector(`.filter-pill[data-category="${categoryId}"]`);
+            if (targetBtn) {
+                targetBtn.click();
+                document.getElementById('katalog-harga').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Render Product Cards
+        function renderProducts(categoryFilter = 'all') {
+            const grid = document.getElementById('product-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            const waNumber = siteData.general.whatsapp || "6282242260047";
+            const filtered = categoryFilter === 'all' 
+                ? siteData.products 
+                : siteData.products.filter(p => p.category === categoryFilter);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center text-stone-500">
+                        <i data-lucide="flower" class="w-12 h-12 mx-auto text-emerald-300 mb-3"></i>
+                        <p class="font-bold text-lg text-stone-700">Koleksi untuk kategori ini belum tersedia.</p>
+                        <p class="text-xs text-stone-500 mt-1">Silakan hubungi kami untuk memesan rangkaian custom sesuai keinginan Anda.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            filtered.forEach(product => {
+                const card = document.createElement('div');
+                card.className = "group bg-white rounded-3xl overflow-hidden border border-emerald-100/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between";
+                
+                const priceFormatted = typeof formatRupiah === 'function' ? formatRupiah(product.price) : `Rp ${product.price.toLocaleString('id-ID')}`;
+                const waMsg = encodeURIComponent(`Halo ${siteData.general.storeName || 'Charlotte Flower'}, saya mau pesan ${product.name} (${priceFormatted})`);
+                
+                const badgeHtml = product.badge ? `
+                    <span class="absolute top-4 left-4 bg-emerald-800 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                        ${product.badge}
+                    </span>
+                ` : '';
+
+                card.innerHTML = `
+                    <div>
+                        <div class="relative overflow-hidden h-64 bg-stone-100">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            ${badgeHtml}
+                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full text-stone-700 shadow-sm">
+                                <i data-lucide="heart" class="w-4 h-4 text-emerald-700"></i>
+                            </div>
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <span class="inline-block text-[10px] font-extrabold uppercase tracking-widest text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full mb-2">
+                                ${product.categoryLabel || product.category}
+                            </span>
+                            <h3 class="font-serif text-lg font-bold text-stone-900 group-hover:text-emerald-800 transition line-clamp-1">${product.name}</h3>
+                            <p class="text-stone-600 text-xs mt-1.5 leading-relaxed line-clamp-2">${product.desc}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="p-5 sm:p-6 pt-0 border-t border-stone-100 mt-2">
+                        <div class="flex items-center justify-between pt-3">
+                            <div>
+                                <span class="text-[10px] text-stone-400 block font-medium">Harga</span>
+                                <span class="font-bold text-base sm:text-lg text-emerald-900">${priceFormatted}</span>
+                            </div>
+                            <a href="https://wa.me/${waNumber}?text=${waMsg}" 
+                               target="_blank" 
+                               class="inline-flex items-center gap-1.5 bg-emerald-800 hover:bg-emerald-900 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md hover:shadow-lg transition transform hover:-translate-y-0.5">
+                                <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i>
+                                <span>Pesan</span>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        // Render Articles Grid
+        function renderArticles() {
+            const grid = document.getElementById('articles-grid');
+            if (!grid || !siteData.articles) return;
+            grid.innerHTML = '';
+
+            siteData.articles.forEach(article => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-3xl overflow-hidden border border-emerald-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group";
+
+                card.innerHTML = `
+                    <div>
+                        <div class="relative overflow-hidden h-48 bg-stone-100">
+                            <img src="${article.image}" alt="${article.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm text-emerald-800 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm border border-emerald-100">
+                                ${article.category}
+                            </span>
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <div class="flex items-center gap-2 text-[11px] text-stone-400 mb-2">
+                                <span>${article.date}</span>
+                                <span>•</span>
+                                <span>${article.readTime || '3 menit'}</span>
+                            </div>
+                            <h3 class="font-serif text-base font-bold text-stone-900 group-hover:text-emerald-800 transition line-clamp-2 leading-snug">${article.title}</h3>
+                            <p class="text-stone-600 text-xs mt-2 leading-relaxed line-clamp-3">${article.summary}</p>
+                        </div>
+                    </div>
+                    <div class="p-5 sm:p-6 pt-0">
+                        <button onclick="openArticleModal('${article.id}')" class="w-full inline-flex items-center justify-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold py-2.5 rounded-xl transition">
+                            <span>Baca Selengkapnya</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        // Article Modal Open/Close
+        function openArticleModal(articleId) {
+            const article = siteData.articles.find(a => a.id === articleId);
+            if (!article) return;
+
+            const modal = document.getElementById('article-modal');
+            const content = document.getElementById('article-modal-content');
+
+            content.innerHTML = `
+                <div class="space-y-4">
+                    <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                        ${article.category}
+                    </span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 leading-tight">${article.title}</h2>
+                    <div class="flex items-center gap-3 text-xs text-stone-400 pb-3 border-b border-stone-100">
+                        <span>Oleh: <strong>${article.author || 'Charlotte Florist'}</strong></span>
+                        <span>•</span>
+                        <span>${article.date}</span>
+                    </div>
+                    <div class="rounded-2xl overflow-hidden my-4 max-h-72">
+                        <img src="${article.image}" alt="${article.title}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="prose prose-sm text-stone-700 leading-relaxed">
+                        ${article.content || `<p>${article.summary}</p>`}
+                    </div>
+                    <div class="pt-6 border-t border-stone-100 flex justify-end">
+                        <button onclick="closeArticleModal()" class="bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-bold px-6 py-2.5 rounded-full transition">
+                            Tutup Artikel
+                        </button>
+                    </div>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeArticleModal() {
+            document.getElementById('article-modal').classList.add('hidden');
+        }
+
+        // Initialize on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSite();
+            startHeroAutoSlide();
+        });
+
+        // Navbar shadow on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-xl');
+            } else {
+                navbar.classList.remove('shadow-xl');
+            }
+        });
+    </script>
+</body>
+</html>
